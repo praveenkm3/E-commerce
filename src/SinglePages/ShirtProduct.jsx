@@ -13,6 +13,7 @@ function ShirtProduct() {
   const { id } = useParams();
   const matchProduct = shirtsData?.products?.find(
     (item) => Number(id) === Number(item.id),
+    
   );
   // console.log(matchProduct);
   return (
