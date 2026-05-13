@@ -27,7 +27,7 @@ function Signup(){
             
             <h2 className="text- font-serif text-2xl">Sign up</h2>
             <div>
-            <h5 className="mt-5 text-black font-mono">Email</h5>
+            <h5 className="mt-5 text-black font-mono font-bold">Email</h5>
             <input 
             type="text" 
             name="email"
@@ -38,7 +38,7 @@ function Signup(){
             />
             </div>
             <div>
-                <h5 className=" text-black font-mono">Password</h5>
+                <h5 className=" text-black font-mono font-bold">Password</h5>
                 <input 
                 name="password"
                 type="password"

@@ -1,7 +1,7 @@
 import { useState } from "react"; 
 import Login from "./Login";
 import Signup from "./Signup";
-import Home from "../components/Home";
+import StartHome from "./StartHome";
 function StartPage(){
     const [isOpen,setOpen]=useState(false);//mobile view
     const [isLogin, setLogin] = useState(false);//login popup
@@ -65,7 +65,8 @@ function StartPage(){
             return setSign(!isSign)}}>
 
         
-        <Home/> 
+         
+        <StartHome/>  
         </button>
         </>
     )
