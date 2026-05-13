@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-
+import Navbar from "../components/Navbar"
 import { useState, useEffect } from "react";
 function Shirts() {
   const [shirtsData, setShirtsData] = useState({});
@@ -11,6 +11,7 @@ function Shirts() {
   }, []);
   return (
     <>
+    <Navbar/>
       {shirtsData?.products != undefined ? (
         <div className="grid grid-cols-7 gap-4 px-4 my-5">
           {shirtsData?.products.map((item) => {

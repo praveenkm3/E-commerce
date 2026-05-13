@@ -1,6 +1,7 @@
 import Navbar from "./Navbar"
 import ProductNavbar from "./ProductNavbar"; 
 import Home from "./Home";
+
 function LandingPage(){
     return(
         <> 
@@ -8,7 +9,12 @@ function LandingPage(){
             <Navbar/>
             <ProductNavbar/>
         </div>
-        <Home/>
+        <div>
+            <div className="py-7"> 
+                <Home/>
+            </div>
+             
+        </div>
         </>
     )
 }

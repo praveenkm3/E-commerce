@@ -9,8 +9,20 @@ import Laptops from '../pages/Laptops';
 import LaptopProduct from '../SinglePages/LaptopProduct';
 import Shirts from '../pages/Shirts';
 import ShirtProduct from '../SinglePages/ShirtProduct';
+import Signup from "../Auth/Signup";
+import Login from "../Auth/Login";
+import LandingPage from './LandingPage';
+import Home from './Home';
 import { createBrowserRouter } from 'react-router';
 const routes=createBrowserRouter([
+  {
+    path:'/login',
+    element:<Login/>
+  },
+  {
+    path:'/signup',
+    element:<Signup/>
+  },
   {
     path:'/',
     element:<App/>
@@ -54,6 +66,14 @@ const routes=createBrowserRouter([
   {
     path:'/shirts/:id',
     element:<ShirtProduct/>
+  },
+  {
+    path:'/landingpage',
+    element:<LandingPage/>
+  },
+  {
+    path:'/home',
+    element:<Home/>
   }
 ])
 export default routes;

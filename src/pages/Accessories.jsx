@@ -1,6 +1,6 @@
-import { Link } from "react-router";
-
+import { Link } from "react-router"; 
 import { useState, useEffect } from "react";
+import Navbar from "../components/Navbar";
 function Accessories() {
   const [accessData, setAccessData] = useState({});
   useEffect(() => {
@@ -11,6 +11,7 @@ function Accessories() {
   }, []);
   return (
     <>
+    <Navbar/>
       {accessData?.products != undefined ? (
         <div className="grid grid-cols-7 gap-4 px-4 my-5">
           {accessData?.products.map((item) => {

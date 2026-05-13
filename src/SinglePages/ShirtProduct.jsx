@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import Navbar from "../components/Navbar";
 
 function ShirtProduct() {
   const [shirtsData, setShirtsData] = useState([]);
@@ -18,6 +19,7 @@ function ShirtProduct() {
   // console.log(matchProduct);
   return (
     <>
+    <Navbar/>
       {matchProduct ? (
         <div className="grid grid-cols-2  h-screen mt-20 ">
           <div className="h-[70dvh] w-3xl pe-5">

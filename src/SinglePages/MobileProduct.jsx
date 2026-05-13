@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import Navbar from "../components/Navbar";
 
 function MobileProduct() {
   const [phonesData, setPhonesData] = useState([]);
@@ -16,6 +17,7 @@ function MobileProduct() {
   // console.log(matchProduct);
   return (
     <>
+    <Navbar/>
       {matchProduct ? (
         <div className="grid grid-cols-2  h-screen mt-20 ">
           <div className="h-[70dvh] w-3xl pe-5">

@@ -1,38 +1,61 @@
+import { Link } from "react-router";
+
 function Home() {
   return (
-    
-    <div className="grid gap-4 absolute mt-30 ">
-        <div className="grid grid-cols-4 gap-0.5">
-            <div className="w-85">
-            <img className="h-auto max-w-1xl rounded-base" src="https://shop.teamsg.in/cdn/shop/files/1_39faa2c8-d3d8-40b0-8f38-f70e8d6e2ee7.webp?v=1768999299&width=533" alt=""/>
-            </div>
-            <div className="w-2xl">
-            <img className="h-auto max-w-1xl rounded-base" src="https://sell.gameloot.in/wp-content/uploads/sites/4/2024/02/Samsung-Laptop.jpg" alt=""/>
-            </div>
-            <div className="px-20">
-            <img className="h-auto max-w-1xl rounded-base" src="https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/o/x/n/d24-dual-sim-keypad-phone-1200-mah-battery-big-1-88-inch-display-original-imahcycyzpmy3mmt.jpeg?q=70" alt=""/>
-            </div>
-            <div className="w-50">
-            <img className="h-auto max-w-1xl rounded-base" src="https://rukminim2.flixcart.com/image/612/612/xif0q/headphone/x/k/f/muffs-m2-wireless-portronics-original-imagpef3fqyrdn24.jpeg?q=70" alt=""/>
-            </div>
+    <div className="ml-2 me-2 bg-white">
+        <div className="py-10">
+            <h1> </h1>
         </div>
-        <div className="grid grid-cols-5 gap-4">
-            <div>
-                <img className="h-auto max-w-full rounded-base" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-1.jpg" alt=""/>
-            </div>
-            <div>
-                <img className="h-auto max-w-full rounded-base" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-2.jpg" alt=""/>
-            </div>
-            <div>
-                <img className="h-auto max-w-full rounded-base" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-3.jpg" alt=""/>
-            </div>
-            <div>
-                <img className="h-auto max-w-full rounded-base" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-4.jpg" alt=""/>
-            </div>
-            <div>
-                <img className="h-auto max-w-full rounded-base" src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image-5.jpg" alt=""/>
-            </div>
+        <div className="grid grid-cols-3 gap-4 mt-4">
+            <Link to={`/mobiles`}>
+                <div >
+                    <img className="rounded-3xl" src="https://rukminim2.flixcart.com/fk-p-flap/3200/1560/image/5623704a356b5857.png?q=60" alt="" />
+                </div>
+            </Link>
+            
+            <Link to={`/accessories`}>
+                <div>
+                    <img className="rounded-3xl" src="https://rukminim2.flixcart.com/fk-p-flap/3200/1560/image/ca5740248470472b.png?q=60" alt="" />
+                </div>
+            </Link>
+            <Link to={`/sports`}>
+                <div>
+                    <img className="rounded-3xl" src="https://rukminim2.flixcart.com/fk-p-flap/480/230/image/23ab51281ae2efde.png?q=90" alt="" />
+                </div>
+            </Link>
         </div>
+        <Link to={`/laptops`}>
+        
+            <div className="mt-2 rounded-sm">
+                <img className="rounded-3xl" src="https://rukminim2.flixcart.com/fk-p-flap/3140/700/image/6345053a799770a1.png?q=60" alt="" />
+            </div>
+        </Link>
+        <div className="flex">
+            <h1 className="font-bold mt-6 mb-6 text-2xl ">Most Selled Jersies</h1>
+        </div>
+        <Link to={'/shirts'}>
+        
+            <div className="grid grid-cols-6 mt-3  h-70 w-full">
+                <div className=" w-45 h-45 items-center-safe">
+                    <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/6/n/m/s-mi045-lini-original-imahayebdhbyvgfy.jpeg?q=70" alt="" />
+                </div>
+                <div className=" w-45 h-45">
+                    <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/h/v/2/xxl-fk-rcb-26-polo-m2-2xs-royal-hitters-original-imahm2yrsbhhz5vm.jpeg?q=70" alt="" />
+                </div>
+                <div className="w-45 h-45">
+                        <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/x/g/9/s-cskk-2026-msd-yellow-cutis-original-imahmmvtwj2ctsvt.jpeg?q=70" alt="" />
+                </div>
+                <div className=" w-45 h-45">
+                        <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/n/5/c/xxl-team-india-t20-cricket-jersey-technolink-original-imahjrt7e2gpy42w.jpeg?q=70" alt="" />
+                </div>
+                <div className=" w-45 h-45">
+                    <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/f/v/r/s-fk-ronaldo7-0-dostitch-original-imah7jvbkfzsgahf.jpeg?q=70" alt="" />
+                </div>
+                <div className=" w-45 h-45">
+                    <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/b/k/i/l-080-homearg2022-m10-be-smv-original-imagt6emgvhjvszp.jpeg?q=70" alt="" />
+                </div>
+            </div>
+        </Link>
     </div>
   );
 }
