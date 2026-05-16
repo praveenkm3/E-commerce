@@ -1,25 +1,56 @@
 import { useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 function Navbar(){
     const [isOpen,setOpen]=useState(false);
+    const[search,setSearch]=useState("");
+    const navigate=useNavigate();
       const products = useSelector((state) => state.cartslice.products);
-      const wishProducts=useSelector((state)=>state.wishslice.wishproducts);
+      const wishProducts=useSelector((state)=>state.wishslice.wishproducts); 
+    function handleSubmit(e){ 
+        e.preventDefault();
+        if (!search.trim()) return;
+
+        const values = ["sports", "mobiles", "accessories", "shirts", "laptops"]; 
+        const searchProduct = values.filter((item) => 
+            item.toLowerCase().includes(search.toLowerCase())
+        );
+
+        if (searchProduct.length > 0) {
+            navigate(`/${searchProduct[0]}`);
+        }else{
+            alert("Product not found")
+        }
+    }
     //   console.log(products);
+    // console.log(search);
     return( 
-        <nav className="bg-black font-bold border-2 rounded-t-2xl">
+        <nav className="bg-black border-2 rounded-t-2xl">
             <div className=" h-16 items-center flex justify-between">
                 <div className="font-bold text-white px-4 text3xl">E-Cart</div>
+                <form onSubmit={handleSubmit}>
+                    <div className="relative"> 
+                    <input 
+                    value={search}
+                    type="text" 
+                    className="bg-amber-50 py-2 px-8 text-black font-serif text-shadow-md rounded-md" 
+                    placeholder="Search for something"
+                    onChange={(e)=>setSearch(e.target.value)}/>
+                     <div className="absolute top-0 ml-50 mt-0.5 text-2xl w-full">
+                        <button type="submit" className="cursor-pointer">🔍</button>
+                     </div>
+                </div>
+                </form>
+                
             
              {/* desktop */}
-                <div className="hidden sm:block space-x-10">
+                <div className="hidden sm:block space-x-10 font-bold">
                     <Link to={`/landingpage`} className="text-gray-300 text-lg px-4 ">Home</Link>
                     <Link to={`/wishlist`} className="text-gray-300 text-lg px-4 ">Wish List<span className="text-orange-700 space-y-5 mb-6">{wishProducts.length}</span></Link>
                     <Link to={`/`} className="text-gray-300 text-lg px-4 ">Log Out</Link> 
                     <Link to={`/cart`} className="text-gray-300 text-lg px-4 ">Cart<span className="text-orange-700 space-y-5 mb-6">{products.length>0 ? products.length : 0}</span></Link>
 
                 </div>
-
                 <button onClick={()=>setOpen(!isOpen)} className="block sm:hidden text-gray-400 text-lg px-4">Open</button>
             </div> 
 

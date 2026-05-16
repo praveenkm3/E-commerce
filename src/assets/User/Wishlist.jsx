@@ -37,7 +37,7 @@ function WishList() {
         {(wishListProducts ?
             wishListProducts.map((item,index)=>{
                 return( 
-                    <div className=" bg-white p-2 rounded-md border-1 " key={index}>
+                    <div className=" bg-white p-2 rounded-md border " key={index}>
                         <div className="w-30">
                             <h1 className="font-bold">{item.title}</h1>
                             <img src={item.images[0]} alt="img not found" className="ml-13"/>

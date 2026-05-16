@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 function Home() {
   return (
-    <div className="ml-2 me-2 bg-white">
+    <div className="ml-2 me-2 bg-white px-3">
         <div className="py-10">
             <h1> </h1>
         </div>
