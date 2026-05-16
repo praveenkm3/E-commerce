@@ -1,3 +1,6 @@
+//stores
+import { useDispatch } from "react-redux";
+import {addProduct} from "../slices/CartSlice"
 
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
@@ -17,6 +20,11 @@ function ShirtProduct() {
     
   );
   // console.log(matchProduct);
+  //store related
+  const dispatch=useDispatch();
+  function addCartSubmit(){
+    dispatch(addProduct(matchProduct));
+  }
   return (
     <>
     <Navbar/>
@@ -43,7 +51,7 @@ function ShirtProduct() {
             <div class="py-4 pe-4 text-2xl w-2xl text-black">
                 <p class="select-none w-full text-sm font-medium text-heading">{matchProduct.description}</p>
             </div>
-            <button className="bg-yellow-400 py-3 px-5 rounded-2xl">Add to Cart</button>
+            <button className="bg-yellow-400 py-3 px-5 rounded-2xl" onClick={addCartSubmit}>Add to Cart</button>
           </div>
         </div>
       ) : (

@@ -13,6 +13,7 @@ export const CartSlice = createSlice({
       if (existed) {
         existed.quantity += 1;
       } else {
+        // state.cartProducts.push({ ...action.payload, quantity: 1 });
         state.products.push(action.payload);
         let again = state.products.find(
           (item) => item.id === action.payload.id,
@@ -37,6 +38,5 @@ export const CartSlice = createSlice({
   },
 });
 
-export const { addProduct, removeProduct, decreaseQuantity } =
-  CartSlice.actions;
+export const { addProduct, removeProduct, decreaseQuantity } = CartSlice.actions;
 export default CartSlice.reducer;

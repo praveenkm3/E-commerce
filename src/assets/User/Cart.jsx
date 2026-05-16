@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import Navbar from "../..//components/Navbar";
+import Navbar from "../../components/Navbar";
 import { useDispatch } from "react-redux";
 import {
   removeProduct,
@@ -11,7 +11,7 @@ export default function Cart() {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.cartslice.products);
-  //   console.log(products);
+    // console.log(products);
   function totalPrice(products){
     let tot=0;
     for(let ele of products){
@@ -47,7 +47,7 @@ export default function Cart() {
                   </div>
 
                   <div className=" min-w-0">
-                    <h3 className="text-base font-semibold text-slate-800 truncate">
+                    <h3 className="text-base font-semibold text-slate-800 ">
                       {item.title}
                     </h3>
                     <li className="text-sm text-slate-500 mt-1">

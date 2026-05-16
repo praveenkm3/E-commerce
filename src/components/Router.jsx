@@ -14,6 +14,7 @@ import Login from "../Auth/Login";
 import LandingPage from './LandingPage';
 import Home from './Home';
 import Cart from '../assets/User/Cart';
+import WishList from '../assets/User/Wishlist';
 import { createBrowserRouter } from 'react-router';
 const routes=createBrowserRouter([
   {
@@ -79,6 +80,10 @@ const routes=createBrowserRouter([
   {
     path:'/cart',
     element:<Cart/>
-  }
+  },
+  {
+    path:'/wishlist',
+    element:<WishList/>
+  },
 ])
 export default routes;

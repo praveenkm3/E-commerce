@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import Navbar from "../components/Navbar";
-
-
+import { useDispatch } from "react-redux";
+import { addProduct } from "../slices/CartSlice";
 
 function LaptopProduct() {
   const [loptopsData, setLoptopsData] = useState([]);
@@ -19,6 +19,11 @@ function LaptopProduct() {
     (item) => Number(id) === Number(item.id),
   );
   // console.log(matchProduct);
+  //store related
+  const dispatch=useDispatch();
+  function addCartSubmit(){
+    dispatch(addProduct(matchProduct));
+  }
   return (
     <>
     <Navbar/>
@@ -42,10 +47,10 @@ function LaptopProduct() {
               <li>  Weight : {matchProduct.weight}00 gms</li>
             </ul>
             <h2 className="text-2xl py-3 text-orange-400 font-serif ">Price : ${matchProduct.price}</h2>
-            <div class="py-4 pe-4 text-2xl w-2xl text-black">
-                <p class="select-none w-full text-sm font-medium text-heading">{matchProduct.description}</p>
+            <div className="py-4 pe-4 text-2xl w-2xl text-black">
+                <p className="select-none w-full text-sm font-medium text-heading">{matchProduct.description}</p>
             </div>
-            <button className="bg-yellow-400 py-3 px-5 rounded-2xl">Add to Cart</button>
+            <button className="bg-yellow-400 py-3 px-5 rounded-2xl" onClick={addCartSubmit}>Add to Cart</button>
           </div>
         </div>
       ) : (
