@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 import Navbar from "../components/Navbar"
+//usecart 
+import UseSearch from "../assets/User/SearchContext";
 
 import { useDispatch,useSelector } from "react-redux";
 import { addProduct } from "../slices/CartSlice";
@@ -9,6 +11,9 @@ import { removeFromWish } from "../slices/WishlistSlice";
 
 import { useState, useEffect } from "react";
 function Shirts() {
+  //use search
+    const{searchText}=UseSearch();
+    
   //wishedproducts
   const wishListProducts=useSelector((state)=>state.wishslice.wishproducts)
   const [shirtsData, setShirtsData] = useState({});
@@ -18,6 +23,14 @@ function Shirts() {
       .then((res) => setShirtsData(res))
       .catch((err) => console.log("Error occurs ", err));
   }, []);
+  //filter on search value
+  const filteredProducts=shirtsData?.products ? shirtsData.products.filter((item)=>{
+    if(!searchText.trim()) return true
+    return item.title.toLowerCase().startsWith(searchText.trim().toLowerCase());
+  }):[];
+ 
+
+
 const dispatch=useDispatch();
   function addCartSubmit(item){
     let matchProduct=shirtsData.products.find((product)=>product.id==item.id)
@@ -47,7 +60,7 @@ const dispatch=useDispatch();
     <Navbar/>
       {shirtsData?.products != undefined ? (
         <div className="grid grid-cols-5 gap-4 px-4 my-5">
-          {shirtsData?.products.map((item) => { 
+          {filteredProducts?.map((item) => { 
             const AlreadyWished=wishListProducts.some((wishItem)=>wishItem.id===item.id);
             return (
               <div className=" block max-w-sm p-6 border rounded-2xl" key={item.id}>

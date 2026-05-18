@@ -6,15 +6,17 @@ import './index.css'
 import routes from './components/Router.jsx';
 import { store } from './store.js';
 import { Provider } from 'react-redux';
+import { SearchContextProvider } from './assets/User/SearchContext.jsx';
 const root=createRoot(document.getElementById('root'));
 
 
 
 root.render(
   <> 
-  <Provider store={store}>
-    <RouterProvider router={routes} /> 
-  </Provider>
-    
+  <SearchContextProvider>
+    <Provider store={store}>
+      <RouterProvider router={routes} /> 
+    </Provider>
+  </SearchContextProvider>
   </>
 )

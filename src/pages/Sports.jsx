@@ -1,5 +1,8 @@
-import { Link } from "react-router";
-import Navbar from "../components/Navbar";
+//usesearch
+import UseSearch from "../assets/User/SearchContext";
+
+
+import { Link } from "react-router"; 
 //addtocart
 import { useDispatch,useSelector } from "react-redux";
 import { addProduct } from "../slices/CartSlice";
@@ -7,18 +10,35 @@ import { addProduct } from "../slices/CartSlice";
 import { addToWish } from "../slices/WishlistSlice";
 import { removeFromWish } from "../slices/WishlistSlice";
 import { useState, useEffect } from "react";
+import Navbar from "../components/Navbar";
 
 function Sports() { 
+  //use search
+    const{searchText}=UseSearch();
+  
   //wishedproducts
   const wishListProducts=useSelector((state)=>state.wishslice.wishproducts)
 
-  const [sportsData, setSportsData] = useState({});
+  
+  const [sportsData, setSportsData] = useState(null); 
+
   useEffect(() => {
     fetch("https://dummyjson.com/products/category/sports-accessories")
       .then((res) => res.json())
-      .then((res) => setSportsData(res))
+      .then((res) =>setSportsData(res))
       .catch((err) => console.log("Error occurs ", err));
   }, []);
+
+  //navbar search
+  const filteredProducts = sportsData?.products ? sportsData.products.filter((item) => {
+        if (!searchText.trim()) return true; 
+  return item.title.toLowerCase().startsWith(searchText.trim().toLowerCase());
+}) : [];
+
+
+  //search for sports
+  // console.log(SportTitles);
+  // console.log(sportsData.products)
 //addtocart
   const dispatch=useDispatch();
   function addCartSubmit(item){
@@ -45,12 +65,16 @@ function Sports() {
         // console.log(product2) 
         dispatch(removeFromWish(product2));
   }
+  //usesearch
+  
   return (
-    <>
+    
+    <> 
     <Navbar/>
+     
       {sportsData?.products != undefined ? (
         <div className="grid grid-cols-5 gap-4 px-4 my-5">
-          {sportsData?.products.map((item) => {
+          {filteredProducts?.map((item) => {
             const AlreadyWished=wishListProducts.some((wishItem)=>wishItem.id===item.id);
             return (
               <div className=" block max-w-sm p-6 border rounded-2xl" key={item.id}>

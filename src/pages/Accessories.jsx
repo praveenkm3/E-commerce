@@ -1,3 +1,6 @@
+//usesearch
+import UseSearch from "../assets/User/SearchContext";
+
 import { Link } from "react-router"; 
 import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
@@ -10,6 +13,9 @@ import { removeFromWish } from "../slices/WishlistSlice";
 
 
 function Accessories() {
+  //use search
+  const{searchText}=UseSearch();
+      
   //wishedproducts
   const wishListProducts=useSelector((state)=>state.wishslice.wishproducts)
 
@@ -20,6 +26,12 @@ function Accessories() {
       .then((res) => setAccessData(res))
       .catch((err) => console.log("Error occurs ", err));
   }, []);
+  //navbar search
+  const filteredProducts = accessData?.products ? accessData.products.filter((item) => {
+        if (!searchText.trim()) return true; 
+  return item.title.toLowerCase().startsWith(searchText.trim().toLowerCase());
+}) : [];
+
   //addtocart
   const dispatch=useDispatch();
   function addCartSubmit(item){
@@ -51,7 +63,7 @@ function Accessories() {
     <Navbar/>
       {accessData?.products != undefined ? (
         <div className="grid grid-cols-5 gap-4 px-4 my-5">
-          {accessData?.products.map((item) => {
+          {filteredProducts?.map((item) => {
             const AlreadyWished=wishListProducts.some((wishItem)=>wishItem.id===item.id);
             return (
               <div className=" block max-w-sm p-6 border rounded-2xl" key={item.id}>

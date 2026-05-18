@@ -1,25 +1,36 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useSelector } from "react-redux";
+//useSearch
+import UseSearch from "../assets/User/SearchContext";
+import { useLocation } from "react-router";
+
 function Navbar(){
+    //useSearch
+    const{searchText,addSearch,removeSearch}=UseSearch();
     const [isOpen,setOpen]=useState(false);
-    const[search,setSearch]=useState("");
+    const location=useLocation().pathname;
+    // console.log(typeof location);
+    // const[search,setSearch]=useState("");
     const navigate=useNavigate();
       const products = useSelector((state) => state.cartslice.products);
       const wishProducts=useSelector((state)=>state.wishslice.wishproducts); 
     function handleSubmit(e){ 
         e.preventDefault();
-        if (!search.trim()) return;
+        if (!searchText.trim()) return;
+        //on landingpage only
+        if(location==="/landingpage"){
+            const values = ["sports", "mobiles", "accessories", "shirts", "laptops"]; 
+            const searchProduct = values.filter((item) => 
+                item.toLowerCase().includes(searchText.toLowerCase())
+            );
 
-        const values = ["sports", "mobiles", "accessories", "shirts", "laptops"]; 
-        const searchProduct = values.filter((item) => 
-            item.toLowerCase().includes(search.toLowerCase())
-        );
-
-        if (searchProduct.length > 0) {
-            navigate(`/${searchProduct[0]}`);
-        }else{
-            alert("Product not found")
+            if (searchProduct.length > 0) {
+                navigate(`/${searchProduct[0]}`);
+                removeSearch("");//for next navbar
+            }else{
+                alert("Product not found");
+            }
         }
     }
     //   console.log(products);
@@ -31,11 +42,11 @@ function Navbar(){
                 <form onSubmit={handleSubmit}>
                     <div className="relative"> 
                     <input 
-                    value={search}
+                    value={searchText}
                     type="text" 
                     className="bg-amber-50 py-2 px-8 text-black font-serif text-shadow-md rounded-md" 
-                    placeholder="Search for something"
-                    onChange={(e)=>setSearch(e.target.value)}/>
+                    placeholder="Search for products"
+                    onChange={(e)=>addSearch(e.target.value)}/>
                      <div className="absolute top-0 ml-50 mt-0.5 text-2xl w-full">
                         <button type="submit" className="cursor-pointer">🔍</button>
                      </div>

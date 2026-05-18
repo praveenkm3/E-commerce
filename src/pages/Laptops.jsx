@@ -1,3 +1,7 @@
+//usesearch
+import UseSearch from "../assets/User/SearchContext";
+
+
 import { Link } from "react-router";
 import Navbar from "../components/Navbar";
 import { useState, useEffect } from "react";
@@ -6,6 +10,9 @@ import { addToWish,removeFromWish } from "../slices/WishlistSlice";
 import { addProduct } from "../slices/CartSlice";
 
 function Laptops() {
+  //use search
+    const{searchText}=UseSearch();
+    
   //wishedproducts
   const wishListProducts=useSelector((state)=>state.wishslice.wishproducts)
 
@@ -16,6 +23,11 @@ function Laptops() {
       .then((res) => setLaptopsData(res))
       .catch((err) => console.log("Error occurs ", err));
   }, []);
+//navbar search
+  const filteredProducts = laptopsData?.products ? laptopsData.products.filter((item) => {
+        if (!searchText.trim()) return true; 
+  return item.title.toLowerCase().startsWith(searchText.trim().toLowerCase());
+}) : [];
 
 //addtocart
   const dispatch=useDispatch();
@@ -47,8 +59,8 @@ function Laptops() {
     <>
     <Navbar/>
       {laptopsData?.products != undefined ? (
-        <div className="grid grid-cols-7 gap-4 px-4 my-5">
-          {laptopsData?.products.map((item) => {
+        <div className="grid grid-cols-5 gap-4 px-4 my-5">
+          {filteredProducts?.map((item) => {
             const AlreadyWished=wishListProducts.some((wishItem)=>wishItem.id===item.id);
             return (
               <div className=" block max-w-sm p-6 border rounded-2xl" key={item.id}>
@@ -56,7 +68,7 @@ function Laptops() {
                 : <button className="flex justify-end bg-amber-200 rounded-2xl ml-25 px-2 cursor-pointer" onClick={()=>{WishButton(item)}}>Add to Wishlist</button>
             }
                 <img className="rounded-base" src={item.images[0]} alt="" />
-                <p className="mb-3  tracking-tight text-heading leading-8">
+                <p className="mb-3  tracking-tight text-heading leading-8 truncate">
                   {item.title}
                 </p>
                 <p className="mb-3  tracking-tight text-heading leading-8">

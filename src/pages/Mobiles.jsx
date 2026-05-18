@@ -1,3 +1,5 @@
+import UseSearch from "../assets/User/SearchContext";
+
 import { Link } from "react-router";
 import Navbar from "../components/Navbar";
 import { useState, useEffect } from "react";
@@ -6,6 +8,8 @@ import { addProduct } from "../slices/CartSlice";
 import { removeFromWish } from "../slices/WishlistSlice";
 import { addToWish } from "../slices/WishlistSlice";
 function Mobiles() {
+  //usesearch
+  const {searchText}=UseSearch();
   //wishlistproducts
   const wishListProducts=useSelector((state)=>state.wishslice.wishproducts);
   const [phonesData, setPhonesData] = useState({});
@@ -15,6 +19,13 @@ function Mobiles() {
       .then((res) => setPhonesData(res))
       .catch((err) => console.log("Error occurs ", err));
   }, []);
+
+  //navbar search
+  const filteredProducts = phonesData?.products ? phonesData.products.filter((item) => {
+        if (!searchText.trim()) return true; 
+  return item.title.toLowerCase().startsWith(searchText.trim().toLowerCase());
+}) : [];
+
   //addtocart
   const dispatch=useDispatch();
   function addCartSubmit(item){
@@ -46,7 +57,7 @@ function Mobiles() {
     <Navbar/>
       {phonesData?.products != undefined ? (
         <div className="grid grid-cols-5 gap-4 px-4 my-5">
-          {phonesData?.products.map((item) => {
+          {filteredProducts?.map((item) => {
             const AlreadyWished=wishListProducts.some((wishItem)=>wishItem.id===item.id);
             return (
               <div className=" block max-w-sm p-6 border rounded-2xl" key={item.id}>
