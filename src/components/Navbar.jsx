@@ -1,11 +1,15 @@
+//firebase
+import { auth } from "../firebase";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 //useSearch
 import UseSearch from "../assets/User/SearchContext";
 import { useLocation } from "react-router";
+import { Button } from "@mui/material";
 
 function Navbar(){
+    
     //useSearch
     const{searchText,addSearch,removeSearch}=UseSearch();
     const [isOpen,setOpen]=useState(false);
@@ -36,7 +40,7 @@ function Navbar(){
     //   console.log(products);
     // console.log(search);
     return( 
-        <nav className="bg-black border-2 rounded-t-2xl">
+        <nav className="bg-black border-2 ">
             <div className=" h-16 items-center flex justify-between">
                 <div className="font-bold text-white px-4 text3xl">E-Cart</div>
                 <form onSubmit={handleSubmit}>
@@ -56,10 +60,10 @@ function Navbar(){
             
              {/* desktop */}
                 <div className="hidden sm:block space-x-10 font-bold">
-                    <Link to={`/landingpage`} className="text-gray-300 text-lg px-4 ">Home</Link>
-                    <Link to={`/wishlist`} className="text-gray-300 text-lg px-4 ">Wish List<span className="text-orange-700 space-y-5 mb-6">{wishProducts.length}</span></Link>
-                    <Link to={`/`} className="text-gray-300 text-lg px-4 ">Log Out</Link> 
-                    <Link to={`/cart`} className="text-gray-300 text-lg px-4 ">Cart<span className="text-orange-700 space-y-5 mb-6">{products.length>0 ? products.length : 0}</span></Link>
+                    <Link to={`/landingpage`} className="text-gray-300 text-lg px-4 "><Button>Home</Button></Link>
+                    <Link to={`/wishlist`} className="text-gray-300 text-lg px-4 "><Button>Wish List</Button><span className="text-orange-700 space-y-5 mb-6">{wishProducts.length}</span></Link>
+                    <Button className="text-gray-300 text-lg px-4 " onClick={()=>auth.signOut()}>Log Out</Button> 
+                    <Link to={`/cart`} className="text-gray-300 text-lg px-4 "><Button>Cart</Button><span className="text-orange-700 space-y-5 mb-6">{products.length>0 ? products.length : 0}</span></Link>
 
                 </div>
                 <button onClick={()=>setOpen(!isOpen)} className="block sm:hidden text-gray-400 text-lg px-4">Open</button>

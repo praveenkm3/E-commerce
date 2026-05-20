@@ -1,5 +1,9 @@
+//icons
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 //usesearch
 import UseSearch from "../assets/User/SearchContext";
+
 
 
 import { Link } from "react-router"; 
@@ -13,6 +17,8 @@ import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 
 function Sports() { 
+  //debouncesearch
+  const[debounceSearch,setDebounceSearch]=useState("");
   //use search
     const{searchText}=UseSearch();
   
@@ -28,12 +34,19 @@ function Sports() {
       .then((res) =>setSportsData(res))
       .catch((err) => console.log("Error occurs ", err));
   }, []);
+  //search after 300ms
+  useEffect(()=>{
+    const timer=setTimeout(()=>{
+      setDebounceSearch(searchText);
+    },500)
+    return ()=>clearTimeout(timer);
+  },[searchText])
 
   //navbar search
   const filteredProducts = sportsData?.products ? sportsData.products.filter((item) => {
-        if (!searchText.trim()) return true; 
-  return item.title.toLowerCase().startsWith(searchText.trim().toLowerCase());
-}) : [];
+        if (!debounceSearch.trim()) return true; 
+        return item.title.toLowerCase().startsWith(debounceSearch.trim().toLowerCase());
+        }) : [];
 
 
   //search for sports
@@ -78,8 +91,8 @@ function Sports() {
             const AlreadyWished=wishListProducts.some((wishItem)=>wishItem.id===item.id);
             return (
               <div className=" block max-w-sm p-6 border rounded-2xl" key={item.id}>
-                {AlreadyWished ? <button className="flex justify-end bg-amber-200 rounded-2xl ml-40 px-2 cursor-pointer" onClick={()=>{Unwish(item)}}>UnWish</button>
-                : <button className="flex justify-end bg-amber-200 rounded-2xl ml-25 px-2 cursor-pointer" onClick={()=>{WishButton(item)}}>Add to Wishlist</button>
+                {AlreadyWished ? <button className="flex justify-end  rounded-2xl ml-45 px-2 cursor-pointer" onClick={()=>{Unwish(item)}}><FavoriteIcon sx={{color:"#F73D93"}}/></button>
+                : <button className="flex justify-end rounded-2xl ml-45 px-2 cursor-pointer" onClick={()=>{WishButton(item)}}><FavoriteBorderIcon/></button>
             }
                 <img className="rounded-base" src={item.images[0]} alt="" />
                 <p className="mb-3  tracking-tight text-heading leading-8">
