@@ -1,26 +1,15 @@
-//icons
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-
-
+ 
+import MediaCard from '../components/Product';
 //usesearch
 import UseSearch from "../assets/User/SearchContext";
-
-
-import { Link } from "react-router";
+ 
 import Navbar from "../components/Navbar";
-import { useState, useEffect } from "react";
-import { useDispatch,useSelector } from "react-redux";
-import { addToWish,removeFromWish } from "../slices/WishlistSlice";
-import { addProduct } from "../slices/CartSlice";
+import { useState, useEffect } from "react"; 
 
 function Laptops() {
   //use search
-    const{searchText}=UseSearch();
-    
-  //wishedproducts
-  const wishListProducts=useSelector((state)=>state.wishslice.wishproducts)
-
+  const{searchText}=UseSearch();
+  
   const [laptopsData, setLaptopsData] = useState({});
   useEffect(() => {
     fetch("https://dummyjson.com/products/category/laptops")
@@ -33,60 +22,16 @@ function Laptops() {
         if (!searchText.trim()) return true; 
   return item.title.toLowerCase().startsWith(searchText.trim().toLowerCase());
 }) : [];
-
-//addtocart
-  const dispatch=useDispatch();
-  function addCartSubmit(item){
-    let matchProduct=laptopsData.products.find((product)=>product.id==item.id)
-    if(matchProduct){
-    dispatch(addProduct(matchProduct));
-    }else{
-      console.log("Product is not matched")
-    }
-  }
-  //addtowish
-  function WishButton(item){  
-      let Product2=laptopsData.products.find((product)=>product.id==item.id)
-          if(Product2){
-          dispatch(addToWish(Product2));
-          }else{
-            console.log("Product is not matched")
-          } 
-    
-  }
-  //removefromwish
-  function Unwish(item){
-     let product2=wishListProducts.find((product)=>product.id===item.id);
-        // console.log(product2) 
-        dispatch(removeFromWish(product2));
-  }
+  
+  
   return (
     <>
     <Navbar/>
       {laptopsData?.products != undefined ? (
         <div className="grid grid-cols-5 gap-4 px-4 my-5">
-          {filteredProducts?.map((item) => {
-            const AlreadyWished=wishListProducts.some((wishItem)=>wishItem.id===item.id);
+          {filteredProducts?.map((item) => { 
             return (
-              <div className=" block max-w-sm p-6 border rounded-2xl" key={item.id}>
-                {AlreadyWished ? <button className="flex justify-end   rounded-2xl ml-45 px-2 cursor-pointer" onClick={()=>{Unwish(item)}}><FavoriteIcon sx={{color:"#F73D93"}}/></button>
-                : <button className="flex justify-end   rounded-2xl ml-45 px-2 cursor-pointer" onClick={()=>{WishButton(item)}}><FavoriteBorderIcon/></button>
-            }
-                <img className="rounded-base" src={item.images[0]} alt="" />
-                <p className="mb-3  tracking-tight text-heading leading-8 truncate">
-                  {item.title}
-                </p>
-                <p className="mb-3  tracking-tight text-heading leading-8">
-                 Price : ${item.price}
-                </p>
-                <div className="flex gap-2">
-                  <Link to={`/laptops/${item.id}`}>
-                <button className="border bg-black text-white px-9 py-1 rounded-2xl cursor-pointer">View Item</button>
-                </Link> 
-                <button className="border bg-orange-500 text-white px-9 py-1 rounded-2xl cursor-pointer" onClick={()=>{addCartSubmit(item)}}>Add Cart</button>
-                 
-                </div> 
-                </div>
+              <MediaCard item={item} key={item.id}/>
             );
           })}
         </div>

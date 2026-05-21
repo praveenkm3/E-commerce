@@ -2,7 +2,6 @@ import Card from "@mui/material/Card";
 import { Badge } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router";
@@ -15,7 +14,7 @@ import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct } from "../slices/CartSlice";
 import { removeFromWish, addToWish } from "../slices/WishlistSlice";
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 export default function MediaCard({ item }) {
   let products = useSelector((state) => state.cartslice.products);
@@ -46,17 +45,9 @@ export default function MediaCard({ item }) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <Box sx={{ position: "relative" }}>
-        <Carousel axis='horizontal' autoPlay="true" interval="3000">
-          {item.images.map((img,index) => {
-            return (
-                <img src={img}></img>
-            //   <CardMedia
-            //     sx={{ height: 140, py: 15, bgcolor: "#EEEEEE" }}
-            //     image={img}
-            //     title={item.title}
-            //     key={index}
-            //   />
-            );
+        <Carousel axis="horizontal" autoPlay="true" interval="3000">
+          {item.images.map((img) => {
+            return <img src={img}></img>;
           })}
         </Carousel>
 
@@ -90,22 +81,24 @@ export default function MediaCard({ item }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button
-          size="small"
-          onClick={() => {
-            addCartSubmit(item);
-            getProductQuantity();
-          }}
-        >
-          <Badge badgeContent={getProductQuantity()} color="primary">
-            <AddShoppingCartIcon />
-          </Badge>
-        </Button>
-        <Link to={`/sports/${item.id}`}>
-          <Button size="small">
-            <RemoveRedEyeIcon />
+        <Box sx={{display:"flex",justifyContent:"space-around",ml:9 }}>
+          <Button
+            size="small"
+            onClick={() => {
+              addCartSubmit(item);
+              getProductQuantity();
+            }}
+          >
+            <Badge badgeContent={getProductQuantity()} color="primary">
+              <AddShoppingCartIcon />
+            </Badge>
           </Button>
-        </Link>
+          <Link to={`/sports/${item.id}`}>
+            <Button size="small">
+              <RemoveRedEyeIcon />
+            </Button>
+          </Link>
+        </Box>
       </CardActions>
     </Card>
   );

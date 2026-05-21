@@ -1,25 +1,12 @@
-//icons
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-
-import { Link } from "react-router";
-import Navbar from "../components/Navbar"
-//usecart 
+import MediaCard from "../components/Product";
+import Navbar from "../components/Navbar";
+//usecart
 import UseSearch from "../assets/User/SearchContext";
-
-import { useDispatch,useSelector } from "react-redux";
-import { addProduct } from "../slices/CartSlice";
-//addtowish
-import { addToWish } from "../slices/WishlistSlice";
-import { removeFromWish } from "../slices/WishlistSlice";
 
 import { useState, useEffect } from "react";
 function Shirts() {
   //use search
-    const{searchText}=UseSearch();
-    
-  //wishedproducts
-  const wishListProducts=useSelector((state)=>state.wishslice.wishproducts)
+  const { searchText } = UseSearch();
   const [shirtsData, setShirtsData] = useState({});
   useEffect(() => {
     fetch("https://dummyjson.com/products/category/mens-shirts")
@@ -28,66 +15,22 @@ function Shirts() {
       .catch((err) => console.log("Error occurs ", err));
   }, []);
   //filter on search value
-  const filteredProducts=shirtsData?.products ? shirtsData.products.filter((item)=>{
-    if(!searchText.trim()) return true
-    return item.title.toLowerCase().startsWith(searchText.trim().toLowerCase());
-  }):[];
- 
+  const filteredProducts = shirtsData?.products
+    ? shirtsData.products.filter((item) => {
+        if (!searchText.trim()) return true;
+        return item.title
+          .toLowerCase()
+          .startsWith(searchText.trim().toLowerCase());
+      })
+    : [];
 
-
-const dispatch=useDispatch();
-  function addCartSubmit(item){
-    let matchProduct=shirtsData.products.find((product)=>product.id==item.id)
-    if(matchProduct){
-    dispatch(addProduct(matchProduct));
-    }else{
-      console.log("Product is not matched")
-    }
-  }
-  function WishButton(item){  
-        let Product2=shirtsData.products.find((product)=>product.id==item.id)
-            if(Product2){
-            dispatch(addToWish(Product2));
-            }else{
-              console.log("Product is not matched")
-            } 
-      
-    }
-    //removefromwish
-    function Unwish(item){
-       let product2=wishListProducts.find((product)=>product.id===item.id);
-          // console.log(product2) 
-          dispatch(removeFromWish(product2));
-    }
   return (
     <>
-    <Navbar/>
+      <Navbar />
       {shirtsData?.products != undefined ? (
         <div className="grid grid-cols-5 gap-4 px-4 my-5">
-          {filteredProducts?.map((item) => { 
-            const AlreadyWished=wishListProducts.some((wishItem)=>wishItem.id===item.id);
-            return (
-              <div className=" block max-w-sm p-6 border rounded-2xl" key={item.id}>
-                {AlreadyWished ? <button className="flex justify-end  rounded-2xl ml-45 px-2 cursor-pointer" onClick={()=>{Unwish(item)}}><FavoriteIcon sx={{color:"#F73D93"}}/></button>
-                : <button className="flex justify-end  rounded-2xl ml-45 px-2 cursor-pointer" onClick={()=>{WishButton(item)}}><FavoriteBorderIcon/></button>
-            }
-                <img className="rounded-base" src={item.images[0]} alt="" />
-                <p className="mb-3  tracking-tight text-heading leading-8">
-                  {item.title}
-                </p>
-                <p className="mb-3  tracking-tight text-heading leading-8">
-                 Price : ${item.price}
-                </p>
-                
-                <div className="flex gap-2">
-                  <Link to={`/shirts/${item.id}`}>
-                <button className="border bg-black text-white px-9 py-1 rounded-2xl cursor-pointer">View Item</button>
-                </Link> 
-                <button className="border bg-orange-500 text-white px-9 py-1 rounded-2xl cursor-pointer" onClick={()=>{addCartSubmit(item)}}>Add Cart</button>
-
-                </div>
-                </div>
-            );
+          {filteredProducts?.map((item) => {
+            return <MediaCard item={item} key={item.id} />;
           })}
         </div>
       ) : (
@@ -96,13 +39,12 @@ const dispatch=useDispatch();
             type="button"
             className="inline-flex items-center text-body bg-neutral-primary-soft hover:bg-neutral-secondary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
           >
-            
             Loading...
           </button>
         </center>
       )}
     </>
   );
-} 
+}
 
 export default Shirts;

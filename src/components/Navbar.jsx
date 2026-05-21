@@ -1,87 +1,179 @@
 //firebase
 import { auth } from "../firebase";
-import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 //useSearch
 import UseSearch from "../assets/User/SearchContext";
 import { useLocation } from "react-router";
-import { Button } from "@mui/material";
+//navbar
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import HomeIcon from "@mui/icons-material/Home";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { styled, alpha } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import InputBase from "@mui/material/InputBase";
+import Badge from "@mui/material/Badge";
+import SearchIcon from "@mui/icons-material/Search";
 
-function Navbar(){
-    
-    //useSearch
-    const{searchText,addSearch,removeSearch}=UseSearch();
-    const [isOpen,setOpen]=useState(false);
-    const location=useLocation().pathname;
-    // console.log(typeof location);
-    // const[search,setSearch]=useState("");
-    const navigate=useNavigate();
-      const products = useSelector((state) => state.cartslice.products);
-      const wishProducts=useSelector((state)=>state.wishslice.wishproducts); 
-    function handleSubmit(e){ 
-        e.preventDefault();
-        if (!searchText.trim()) return;
-        //on landingpage only
-        if(location==="/landingpage"){
-            const values = ["sports", "mobiles", "accessories", "shirts", "laptops"]; 
-            const searchProduct = values.filter((item) => 
-                item.toLowerCase().includes(searchText.toLowerCase())
-            );
+// Styled components for the Search Bar
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.white || "#fff", 0.15),
+  "&:hover": {
+    backgroundColor: alpha(theme.palette.white || "#fff", 0.25),
+  },
+  marginRight: theme.spacing(2),
+  marginLeft: 0,
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    marginLeft: theme.spacing(3),
+    width: "auto",
+  },
+}));
 
-            if (searchProduct.length > 0) {
-                navigate(`/${searchProduct[0]}`);
-                removeSearch("");//for next navbar
-            }else{
-                alert("Product not found");
-            }
-        }
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
+    },
+  },
+}));
+
+function Navbar() {
+  //useSearch
+  const { searchText, addSearch, removeSearch } = UseSearch();
+  const location = useLocation().pathname;
+  // console.log(typeof location);
+  // const[search,setSearch]=useState("");
+  const navigate = useNavigate();
+  const products = useSelector((state) => state.cartslice.products);
+  const wishProducts = useSelector((state) => state.wishslice.wishproducts);
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (!searchText.trim()) return;
+    //on landingpage only
+    if (location === "/landingpage") {
+      const values = ["sports", "mobiles", "accessories", "shirts", "laptops"];
+      const searchProduct = values.filter((item) =>
+        item.toLowerCase().includes(searchText.toLowerCase()),
+      );
+
+      if (searchProduct.length > 0) {
+        navigate(`/${searchProduct[0]}`);
+        removeSearch(""); //for next navbar
+      } else {
+        alert("Product not found");
+      }
     }
-    function handleLogout(){
-        auth.signOut()
-        navigate('/landingpage')
-    }
-    //   console.log(products);
-    // console.log(search);
-    return( 
-        <nav className="bg-black border-2 ">
-            <div className=" h-16 items-center flex justify-between">
-                <div className="font-bold text-white px-4 text3xl">E-Cart</div>
-                <form onSubmit={handleSubmit}>
-                    <div className="relative"> 
-                    <input 
-                    value={searchText}
-                    type="text" 
-                    className="bg-amber-50 py-2 px-8 text-black font-serif text-shadow-md rounded-md" 
-                    placeholder="Search for products"
-                    onChange={(e)=>addSearch(e.target.value)}/>
-                     <div className="absolute top-0 ml-50 mt-0.5 text-2xl w-full">
-                        <button type="submit" className="cursor-pointer">🔍</button>
-                     </div>
-                </div>
-                </form>
-                
-            
-             {/* desktop */}
-                <div className="hidden sm:block space-x-10 font-bold">
-                    <Link to={`/landingpage`} className="text-gray-300 text-lg px-4 "><Button>Home</Button></Link>
-                    <Link to={`/wishlist`} className="text-gray-300 text-lg px-4 "><Button>Wish List</Button><span className="text-orange-700 space-y-5 mb-6">{wishProducts.length}</span></Link>
-                    <Button className="text-gray-300 text-lg px-4 " onClick={handleLogout}>Log Out</Button> 
-                    <Link to={`/cart`} className="text-gray-300 text-lg px-4 "><Button>Cart</Button><span className="text-orange-700 space-y-5 mb-6">{products.length>0 ? products.length : 0}</span></Link>
+  }
+  function handleLogout() {
+    auth.signOut();
+    navigate("/landingpage");
+  }
+  //   console.log(products);
+  // console.log(search);
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar
+        position="fixed"
+        sx={{
+          backgroundColor: "rgba(25, 118, 210, 0.7)",
+          backdropFilter: "blur(10px)",
+          boxShadow: "none",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.3)",
+          color: "#2C5EAD",
+        }}
+      >
+        <Toolbar>
+          <Typography variant="h6" noWrap component="div">
+            E-Cart
+          </Typography>
 
-                </div>
-                <button onClick={()=>setOpen(!isOpen)} className="block sm:hidden text-gray-400 text-lg px-4">Open</button>
-            </div> 
+          <Box sx={{ ml: "20em" }}>
+            <Search onClick={handleSubmit}>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                sx={{ pr: 40 }}
+                placeholder="Search…"
+                value={searchText}
+                type="text"
+                onChange={(e) => addSearch(e.target.value)}
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+          </Box>
 
-            {/* mobile */}
-                <div className={`${isOpen ? "block" : "hidden"} sm:hidden bg-gray-100  pb-3 space-y-2`}>
-                    <Link  to={`/landingpage`} className="text-gray-400 text-lg px-4 block">Home</Link>
-                    <a href= "" className="text-gray-400 text-lg px-4 block">About</a>
-                    <a href="" className="text-gray-400 text-lg px-4 block">Products</a>
-                    <a href="" className="text-gray-400 text-lg px-4 block">Cart</a> 
-                </div>
-        </nav>  
-    )
+          <Box sx={{ flexGrow: 1 }} />
+
+          <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
+            <Link to={`/landingpage`}>
+              <IconButton>
+                <HomeIcon sx={{ color: "#2C5EAD" }}/>
+              </IconButton>
+            </Link>
+            <Link to={`/wishlist`}>
+              <IconButton
+                size="large"
+                aria-label="show 4 new mails"
+                color="inherit"
+              >
+                <Badge badgeContent={wishProducts.length} color="error">
+                  <FavoriteIcon />
+                </Badge>
+              </IconButton>
+            </Link>
+
+            <IconButton
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+            >
+              <Link to={`/cart`}>
+                <Badge badgeContent={products.length} color="error">
+                  <ShoppingCartIcon />
+                </Badge>
+              </Link>
+            </IconButton>
+            <IconButton onClick={handleLogout}>
+              <LogoutIcon sx={{ color: "#2C5EAD" }} />
+            </IconButton>
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+          </Box>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
 }
 
 export default Navbar;

@@ -23,16 +23,17 @@ function LandingPage(){
     return(
         <>
             {currentUser ? (
-                <>
-                    <div className="fixed w-full z-50">
-                        <Navbar />
-                        <ProductNavbar />
-                    </div>
-                    <div>
-                        <div className="py-7"> 
-                            <Home />
+                <> 
+                        <div>
+                            <Navbar />
                         </div>
-                    </div>
+                        <div className="mt-17 fixed top-0 right-0 w-full mb:40">
+                            <ProductNavbar />
+                        </div> 
+                        <div>
+                            <h1>p</h1>
+                        <Home /> 
+                        </div> 
                 </>
             ) : (
                 <Signup />
@@ -42,3 +43,14 @@ function LandingPage(){
 }
 export default LandingPage;
 
+{/* <>
+                    <div className="fixed w-full z-50">
+                        <Navbar />
+                        <ProductNavbar />
+                    </div>
+                    <div>
+                        <div className="py-7"> 
+                            <Home />
+                        </div>
+                    </div>
+                </> */}
