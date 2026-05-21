@@ -44,22 +44,6 @@ function Signup(){
         }
         
     }
-    //firebase signup
-
-    // function handleSignUp(){
-    //   if(user.email ==="" || user.password ===""){
-    //         alert("Enter details")
-    //     }else{
-    //         createUserWithEmailAndPassword(auth,user.email,user.password)
-    //         .then(()=>{
-    //           navigate('/login')
-    //           // console.log(user.email,user.password);
-    //         })
-    //         .catch(()=>{
-    //           console.log("Eror occured")
-    //         })
-    //     }
-    // }
     async function handleGoogleSignUp(){
       try{
         const res=await signInWithPopup(auth, provider)

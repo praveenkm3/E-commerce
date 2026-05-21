@@ -1,3 +1,8 @@
+//icons
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
+
 //usesearch
 import UseSearch from "../assets/User/SearchContext";
 
@@ -64,8 +69,8 @@ function Laptops() {
             const AlreadyWished=wishListProducts.some((wishItem)=>wishItem.id===item.id);
             return (
               <div className=" block max-w-sm p-6 border rounded-2xl" key={item.id}>
-                {AlreadyWished ? <button className="flex justify-end bg-amber-200 rounded-2xl ml-40 px-2 cursor-pointer" onClick={()=>{Unwish(item)}}>UnWish</button>
-                : <button className="flex justify-end bg-amber-200 rounded-2xl ml-25 px-2 cursor-pointer" onClick={()=>{WishButton(item)}}>Add to Wishlist</button>
+                {AlreadyWished ? <button className="flex justify-end   rounded-2xl ml-45 px-2 cursor-pointer" onClick={()=>{Unwish(item)}}><FavoriteIcon sx={{color:"#F73D93"}}/></button>
+                : <button className="flex justify-end   rounded-2xl ml-45 px-2 cursor-pointer" onClick={()=>{WishButton(item)}}><FavoriteBorderIcon/></button>
             }
                 <img className="rounded-base" src={item.images[0]} alt="" />
                 <p className="mb-3  tracking-tight text-heading leading-8 truncate">

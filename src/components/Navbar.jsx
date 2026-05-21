@@ -37,6 +37,10 @@ function Navbar(){
             }
         }
     }
+    function handleLogout(){
+        auth.signOut()
+        navigate('/landingpage')
+    }
     //   console.log(products);
     // console.log(search);
     return( 
@@ -62,7 +66,7 @@ function Navbar(){
                 <div className="hidden sm:block space-x-10 font-bold">
                     <Link to={`/landingpage`} className="text-gray-300 text-lg px-4 "><Button>Home</Button></Link>
                     <Link to={`/wishlist`} className="text-gray-300 text-lg px-4 "><Button>Wish List</Button><span className="text-orange-700 space-y-5 mb-6">{wishProducts.length}</span></Link>
-                    <Button className="text-gray-300 text-lg px-4 " onClick={()=>auth.signOut()}>Log Out</Button> 
+                    <Button className="text-gray-300 text-lg px-4 " onClick={handleLogout}>Log Out</Button> 
                     <Link to={`/cart`} className="text-gray-300 text-lg px-4 "><Button>Cart</Button><span className="text-orange-700 space-y-5 mb-6">{products.length>0 ? products.length : 0}</span></Link>
 
                 </div>
