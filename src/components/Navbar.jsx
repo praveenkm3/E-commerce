@@ -104,6 +104,7 @@ function Navbar() {
           boxShadow: "none",
           borderBottom: "1px solid rgba(255, 255, 255, 0.3)",
           color: "black",
+          
         }}
       >
         <Toolbar>
