@@ -43,9 +43,9 @@ export default function MediaCard({ item }) {
     (wishItem) => wishItem.id === item.id,
   );
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{  }}>
       <Box sx={{ position: "relative" }}>
-        <Carousel axis="horizontal" autoPlay="true" interval="3000">
+        <Carousel axis="horizontal" autoPlay="true" interval="3000" stopOnHover="true" autoFocus="true">
           {item.images.map((img) => {
             return <img src={img}></img>;
           })}
@@ -81,7 +81,7 @@ export default function MediaCard({ item }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Box sx={{display:"flex",justifyContent:"space-around",ml:9 }}>
+        <Box sx={{display:"flex",justifyContent:"space-around",ml:6 }}>
           <Button
             size="small"
             onClick={() => {
@@ -89,11 +89,11 @@ export default function MediaCard({ item }) {
               getProductQuantity();
             }}
           >
-            <Badge badgeContent={getProductQuantity()} color="primary">
+            <Badge badgeContent={getProductQuantity()} color="secondary">
               <AddShoppingCartIcon />
             </Badge>
           </Button>
-          <Link to={`/sports/${item.id}`}>
+          <Link to={`/single`} state={{product :item}}>
             <Button size="small">
               <RemoveRedEyeIcon />
             </Button>

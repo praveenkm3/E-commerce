@@ -1,14 +1,9 @@
 import App from '../App';
-import Sports from '../pages/Sports';
-import SportProduct from '../SinglePages/SportProduct';
-import Accessories from '../pages/Accessories';
-import AccessoryProduct from '../SinglePages/AccessoryProduct';
-import Mobiles from '../pages/Mobiles';
-import MobileProduct from '../SinglePages/MobileProduct';
-import Laptops from '../pages/Laptops';
-import LaptopProduct from '../SinglePages/LaptopProduct';
-import Shirts from '../pages/Shirts';
-import ShirtProduct from '../SinglePages/ShirtProduct';
+import Sports from '../pages/Sports'; 
+import Accessories from '../pages/Accessories'; 
+import Mobiles from '../pages/Mobiles'; 
+import Laptops from '../pages/Laptops'; 
+import Shirts from '../pages/Shirts'; 
 import Signup from "../Auth/Signup";
 import Login from "../Auth/Login";
 import LandingPage from './LandingPage';
@@ -16,7 +11,12 @@ import Home from './Home';
 import Cart from '../assets/User/Cart';
 import WishList from '../assets/User/Wishlist';
 import { createBrowserRouter } from 'react-router';
+import QuiltedImageList from './SingleProduct';
 const routes=createBrowserRouter([
+  {
+    path:"/single",
+    element:<QuiltedImageList/>
+  },
   {
     path:'/login',
     element:<Login/>
@@ -32,43 +32,23 @@ const routes=createBrowserRouter([
   {
     path:'/sports',
     element:<Sports/>
-  },
-  {
-    path:'/sports/:id',
-    element:<SportProduct/>
-  },
+  }, 
   {
     path:'/accessories',
     element:<Accessories/>
-  },
-  {
-    path:'/accessories/:id',
-    element:<AccessoryProduct/>
-  },
+  }, 
   {
     path:'/mobiles',
     element:<Mobiles/>
-  },
-  {
-    path:'/mobiles/:id',
-    element:<MobileProduct/>
-  },
+  }, 
   {
     path:'/laptops',
     element:<Laptops/>
-  },
-  {
-    path:'/laptops/:id',
-    element:<LaptopProduct/>
-  },
+  }, 
   {
     path:'/shirts',
     element:<Shirts/>
-  },
-  {
-    path:'/shirts/:id',
-    element:<ShirtProduct/>
-  },
+  }, 
   {
     path:'/landingpage',
     element:<LandingPage/>

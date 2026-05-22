@@ -1,29 +1,53 @@
-import { Link } from "react-router";
-import { Button } from "@mui/material";
-function StartPage() { 
+import AppBar from "@mui/material/AppBar";
+
+import { Link } from "react-router"; 
+//navbar 
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton"; 
+import { styled } from '@mui/material/styles';
+
+const Div = styled('div')(({ theme }) => ({
+  ...theme.typography.button, 
+}));
+function StartPage() {
   return (
     <>
-      <div className="fixed w-full z-50">
-        <nav className="bg-black font-bold border-2 top-0">
-          <div className=" h-16 items-center flex justify-between">
-            <div className="font-bold text-white px-4 text3xl">E-Cart</div>
+      <AppBar
+        position="fixed"
+        sx={{
+          backgroundColor: "rgba(25, 118, 210, 0.8)",
+          backdropFilter: "blur(10px)",
+          boxShadow: "none",
+          borderBottom: "1px solid rgba(255, 255, 255, 0.3)",
+          color: "black",
+        }}
+      >
+        <Toolbar>
+          <Typography variant="h6" noWrap component="div">
+            E-Cart
+          </Typography>
 
-            {/* desktop */}
-            <div className="hidden sm:block space-x-10"> 
-                <Link to={'/login'}>
-                  <Button className="text-gray-300 text-lg px-4 ">Login</Button>
-                </Link>
-                <Link to={'/signup'}>
-                  <Button className="text-gray-300 text-lg px-4 ">Signup</Button>
-                </Link>
-              
-            </div>
-          </div>
-        </nav>
-      </div>
+          <Box sx={{ flexGrow: 1 }} />
 
-       
+          <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
+            <Link to={'/login'}>
+            <IconButton  >
+              <Div sx={{p:1.5,color:"black"}}>Sign In</Div>
+            </IconButton>
+            </Link>
+            <Link to={'/signup'}>
+            <IconButton  >
+              <Div sx={{p:1.5,color:"black"}}>Sign Up</Div>
+            </IconButton>
+            </Link>
+          </Box>
+        </Toolbar>
+      </AppBar>
     </>
   );
 }
 export default StartPage;
+
+ 

@@ -99,11 +99,11 @@ function Navbar() {
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: "rgba(25, 118, 210, 0.7)",
+          backgroundColor: "rgba(25, 118, 210, 0.8)",
           backdropFilter: "blur(10px)",
           boxShadow: "none",
           borderBottom: "1px solid rgba(255, 255, 255, 0.3)",
-          color: "#2C5EAD",
+          color: "black",
         }}
       >
         <Toolbar>
@@ -132,7 +132,7 @@ function Navbar() {
           <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
             <Link to={`/landingpage`}>
               <IconButton>
-                <HomeIcon sx={{ color: "#2C5EAD" }}/>
+                <HomeIcon sx={{ color: "black" }}/>
               </IconButton>
             </Link>
             <Link to={`/wishlist`}>
@@ -159,7 +159,7 @@ function Navbar() {
               </Link>
             </IconButton>
             <IconButton onClick={handleLogout}>
-              <LogoutIcon sx={{ color: "#2C5EAD" }} />
+              <LogoutIcon sx={{ color: "black" }} />
             </IconButton>
             <IconButton
               size="large"

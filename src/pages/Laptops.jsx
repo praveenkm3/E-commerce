@@ -2,19 +2,25 @@
 import MediaCard from '../components/Product';
 //usesearch
 import UseSearch from "../assets/User/SearchContext";
- 
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+
 import Navbar from "../components/Navbar";
 import { useState, useEffect } from "react"; 
 
 function Laptops() {
   //use search
   const{searchText}=UseSearch();
+  const [isLoading, setLoading] = useState(true);
   
   const [laptopsData, setLaptopsData] = useState({});
   useEffect(() => {
     fetch("https://dummyjson.com/products/category/laptops")
       .then((res) => res.json())
-      .then((res) => setLaptopsData(res))
+      .then((res) => {
+        setLaptopsData(res);
+        setLoading(false);
+      })
       .catch((err) => console.log("Error occurs ", err));
   }, []);
 //navbar search
@@ -28,7 +34,7 @@ function Laptops() {
     <>
     <Navbar/>
       {laptopsData?.products != undefined ? (
-        <div className="grid grid-cols-5 gap-4 px-4 my-5">
+        <div className="grid grid-cols-5 gap-4 px-4 my-5 mt-20">
           {filteredProducts?.map((item) => { 
             return (
               <MediaCard item={item} key={item.id}/>
@@ -36,15 +42,15 @@ function Laptops() {
           })}
         </div>
       ) : (
-        <center>
-          <button
-            type="button"
-            className="inline-flex items-center text-body bg-neutral-primary-soft hover:bg-neutral-secondary-medium hover:text-heading focus:ring-4 focus:ring-neutral-tertiary-soft shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none"
-          >
-            
-            Loading...
-          </button>
-        </center>
+        <Backdrop
+          sx={(theme) => ({
+            color: "#fff",
+            zIndex: theme.zIndex.drawer + 1,
+          })}
+          open={isLoading}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
       )}
     </>
   );

@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
 import Navbar from "../../components/Navbar";
 import { useDispatch } from "react-redux";
+import EmptyShow from "./EmptyShow";
 import {
   removeProduct,
   addProduct,
   decreaseQuantity,
-} from "../../slices/CartSlice";
-import { Link } from "react-router";
+} from "../../slices/CartSlice"; 
 export default function Cart() {
   const dispatch = useDispatch();
 
@@ -26,10 +26,10 @@ export default function Cart() {
   }
   return (
     <>
+      <div className="mt-20 ">
+
       <Navbar />
-      <center>
-        <h1 className="font-bold text-3xl">Your Cart</h1>
-      </center>
+      </div> 
       {products.length > 0 ? (
         <div className="grid grid-cols-2">
 
@@ -101,14 +101,10 @@ export default function Cart() {
         </div>
 
         
-      ) : (
-        <div className="flex justify-center-safe content-center">
-          <Link to={`/landingpage`}>
-            <button className="text-2xl border bg-black text-gray-300 px-4 py-1 mt-5 rounded-2xl">
-              Click to shopping
-            </button>
-          </Link>
-        </div>
+      ) : ( 
+          <div className="ml-15">
+            <EmptyShow/> 
+          </div>
       )}
     </>
   );

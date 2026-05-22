@@ -2,6 +2,9 @@
 .carousel .thumb.selected, .carousel .thumb:hover {
     border: 1.2px solid #5672!important;
 }
-.css-1kfrdgn-MuiBadge-badge {
-    color: pink!important; 
+.carousel .thumbs-wrapper {
+    display: none!important;
+}
+.carousel .carousel-status {
+    display: none!important;
 }
