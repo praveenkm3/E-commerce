@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { auth } from "../firebase";
 import Navbar from "./Navbar"
+import Footer from "./Footer";
 import ProductNavbar from "./ProductNavbar"; 
 import Home from "./Home";
 import { onAuthStateChanged } from "firebase/auth"; 
@@ -33,6 +34,7 @@ function LandingPage(){
                         <div>
                             <h1>p</h1>
                         <Home /> 
+                        <Footer/>
                         </div> 
                 </>
             ) : (
@@ -43,14 +45,3 @@ function LandingPage(){
 }
 export default LandingPage;
 
-{/* <>
-                    <div className="fixed w-full z-50">
-                        <Navbar />
-                        <ProductNavbar />
-                    </div>
-                    <div>
-                        <div className="py-7"> 
-                            <Home />
-                        </div>
-                    </div>
-                </> */}
