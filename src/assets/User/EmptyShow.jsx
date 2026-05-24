@@ -35,7 +35,7 @@ function EmptyShow() {
         <Stack>
           <Box
             component="img"
-            src="/image.png"
+            src="../../../public/image.png"
             sx={{
               boxShadow: 3,
               p: 4,
@@ -46,7 +46,7 @@ function EmptyShow() {
               borderRadius: "12px",
             }}
           >
-
+            
           </Box>
         </Stack>
       </Box>
