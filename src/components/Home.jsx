@@ -11,13 +11,30 @@ const mobiles= [
         "https://cdn.dummyjson.com/product-images/smartphones/iphone-5s/3.webp"
       ]
 function Home() {
-  const [shirtsData, setShirtsData] = useState({});
-
+  const [accessData, setAccessData] = useState({});
+  const [mobileData,setMobileData]=useState({});
+  const [sportData,setSportData]=useState({});
   useEffect(() => {
     fetch("https://dummyjson.com/products/category/mobile-accessories")
       .then((res) => res.json())
       .then((res) => {
-        setShirtsData(res);
+        setAccessData(res);
+      })
+      .catch((err) => console.log("Error occurs ", err));
+  }, []);
+  useEffect(() => {
+    fetch("https://dummyjson.com/products/category/smartphones")
+      .then((res) => res.json())
+      .then((res) => {
+        setMobileData(res);
+      })
+      .catch((err) => console.log("Error occurs ", err));
+  }, []);
+  useEffect(() => {
+    fetch("https://dummyjson.com/products/category/sports-accessories")
+      .then((res) => res.json())
+      .then((res) => {
+        setSportData(res);
       })
       .catch((err) => console.log("Error occurs ", err));
   }, []);
@@ -77,10 +94,10 @@ function Home() {
             </Typography>
           </Link>
         </Box>
-        <Link to={"/shirts"}>
-          {shirtsData.products ? (
+        <Link to={"/accessories"}>
+          {accessData.products ? (
             <div className="grid grid-cols-5 gap-4 ">
-              {shirtsData.products.slice(0, 5).map((item, index) => {
+              {accessData.products.slice(0, 5).map((item, index) => {
                 return <HomeProduct item={item} key={index} />;
               })}
             </div>
@@ -113,10 +130,10 @@ function Home() {
               height="194"
               src="https://i.pinimg.com/736x/dc/0a/d4/dc0ad4517658009fd943064090bba4e5.jpg"
             />
-                {shirtsData.products ? (
+                {mobileData.products ? (
              <Link to={'/mobiles'}>
             <Box sx={{mt:3,gap:3,display:"grid",gridTemplateColumns:"repeat(3, 1fr)",gridTemplateRows:"repeat(2, 1fr)",height:450}}>
-              {shirtsData.products.slice(0, 6).map((item,index) => {
+              {mobileData.products.slice(0, 6).map((item,index) => {
                   return <HomeProduct item={item} key={index} />;
                   
                 })}
@@ -136,15 +153,36 @@ function Home() {
           })}
         </Carousel>
           </Box>
+        </Box> 
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Typography
+            variant="h4"
+            sx={{ fontFamily: "-apple-system", pl: 3, pt: 2 }}
+          >
+            Sport Accessories
+          </Typography>
+          <Link to={"/sports"}>
+            <Typography variant="h3" sx={{ mr: 2, color: "blue", pt: 1 }}>
+              <ArrowForwardIcon />
+            </Typography>
+          </Link>
         </Box>
+          <Link to={"/sports"}>
+          {sportData.products ? (
+            <div className="grid grid-cols-5 gap-4 ">
+              {sportData.products.slice(0, 5).map((item, index) => {
+                return <HomeProduct item={item} key={index} />;
+              })}
+            </div>
+          ) : (
+            <h2>No data</h2>
+          )}
+        </Link> 
+        
       </div>
     </div>
   );
 }
 export default Home;
 
-
-        //  sx={{height:"100%",borderRadius:4,width:"100%"}}
-        //     component="img"
-        //     src="https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQQMkdzje-f59jzrsFwOAPZGmgxw_1FTdHWp_z6pc5L8DcvIyBkRtiTvQUxQdVPbe9CHJrHWWhU7C4GXos0WS2bG5q_ppGFH_f3QorkfU1f6wUqfgKp9CgfIow"
-          
+ 
