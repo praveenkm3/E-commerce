@@ -10,24 +10,34 @@ import { useState, useEffect } from "react";
 
 function Laptops() {
   //use search
-  const{searchText}=UseSearch();
+  const{searchText,removeSearch}=UseSearch();
   const [isLoading, setLoading] = useState(true);
+  const [dbounceSearch,setDebounceSearch]=useState("");
   
   const [laptopsData, setLaptopsData] = useState({});
+  
   useEffect(() => {
+    
     fetch("https://dummyjson.com/products/category/laptops")
       .then((res) => res.json())
       .then((res) => {
         setLaptopsData(res);
         setLoading(false);
+        removeSearch("");
       })
       .catch((err) => console.log("Error occurs ", err));
   }, []);
 //navbar search
   const filteredProducts = laptopsData?.products ? laptopsData.products.filter((item) => {
-        if (!searchText.trim()) return true; 
-  return item.title.toLowerCase().startsWith(searchText.trim().toLowerCase());
+        if (!dbounceSearch.trim()) return true; 
+  return item.title.toLowerCase().startsWith(dbounceSearch.trim().toLowerCase());
 }) : [];
+useEffect(()=>{
+  const timer=setTimeout(()=>{
+    setDebounceSearch(searchText);
+  },900);
+  return()=>clearTimeout(timer);
+},[searchText])
   
   
   return (

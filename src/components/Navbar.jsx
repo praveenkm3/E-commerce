@@ -85,6 +85,7 @@ function Navbar() {
         removeSearch(""); //for next navbar
       } else {
         alert("Product not found");
+        removeSearch("");
       }
     }
   }

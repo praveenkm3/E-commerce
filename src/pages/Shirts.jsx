@@ -11,6 +11,7 @@ function Shirts() {
   const { searchText } = UseSearch();
   const [shirtsData, setShirtsData] = useState({});
   const [isLoading, setLoading] = useState(true);
+  const [dbounceSearch,setDebounceSearch]=useState("")
 
   useEffect(() => {
     fetch("https://dummyjson.com/products/category/mens-shirts")
@@ -24,13 +25,19 @@ function Shirts() {
   //filter on search value
   const filteredProducts = shirtsData?.products
     ? shirtsData.products.filter((item) => {
-        if (!searchText.trim()) return true;
+        if (!dbounceSearch.trim()) return true;
         return item.title
           .toLowerCase()
-          .startsWith(searchText.trim().toLowerCase());
+          .startsWith(dbounceSearch.trim().toLowerCase());
       })
     : [];
-
+    
+useEffect(()=>{
+  const timer=setTimeout(()=>{
+    setDebounceSearch(searchText);
+  },900);
+  return()=>clearTimeout(timer);
+},[searchText])
   return (
     <>
       <Navbar />

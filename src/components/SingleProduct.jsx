@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { Button, Typography } from "@mui/material";
 import Rating from "@mui/material/Rating";
-import StarIcon from "@mui/icons-material/Star";
+import StarIcon from "@mui/icons-material/Star"; 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import List from "@mui/material/List";
@@ -91,17 +91,26 @@ export default function QuiltedImageList() {
               {currentProduct.title}
             </Div>
             <Box
-              sx={{
-                
+              sx={{ 
                 pr: 40,
                 display: "flex",
                 flexDirection: "column",
                 gap: 2,
               }}
             >
-              <Typography variant="h5">
+              <Typography variant="p" sx={{fontWeight:600,fontSize:20}}>
                 Price : $ {currentProduct.price}
               </Typography>
+              <Box
+                sx={{
+                  
+                }}
+              >
+                <Typography variant="h5" sx={{fontWeight:600,fontSize:20}}>Product Description </Typography>
+                <Typography align="justify" sx={{mt:2}}>
+                  {currentProduct.description}
+                </Typography>
+              </Box>
               <Box
                 sx={{
                    
@@ -111,7 +120,7 @@ export default function QuiltedImageList() {
                   gap: 4,
                 }}
               >
-                <Typography variant="h5">Rating </Typography>
+                <Typography variant="p" sx={{fontWeight:600,fontSize:20}}>Rating </Typography>
                 <Rating
                   name="text-feedback"
                   value={currentProduct.rating}
@@ -120,9 +129,10 @@ export default function QuiltedImageList() {
                   emptyIcon={
                     <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
                   }
-                />
+                /> 
                 <Box sx={{ ml: 2 }}>{labels[currentProduct.rating]}</Box>
               </Box>
+              
               <List
                 sx={{
                   maxWidth: "448px",  

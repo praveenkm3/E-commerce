@@ -67,7 +67,7 @@ function Login() {
       ) {
         alert("login success");
         setUser({ email: "", password: "" });
-        navigate("/sports");
+        navigate("/landingpage");
       } else {
         alert("Invalid password");
       }

@@ -13,6 +13,9 @@ function Accessories() {
   const { searchText } = UseSearch();
   const [isLoading, setLoading] = useState(true);
   const [accessData, setAccessData] = useState({});
+  const [dbounceSearch,setDebounceSearch]=useState("")
+
+
   useEffect(() => {
     fetch("https://dummyjson.com/products/category/mobile-accessories")
       .then((res) => res.json())
@@ -25,13 +28,18 @@ function Accessories() {
   //navbar search
   const filteredProducts = accessData?.products
     ? accessData.products.filter((item) => {
-        if (!searchText.trim()) return true;
+        if (!dbounceSearch.trim()) return true;
         return item.title
           .toLowerCase()
-          .startsWith(searchText.trim().toLowerCase());
+          .startsWith(dbounceSearch.trim().toLowerCase());
       })
     : [];
-
+useEffect(()=>{
+  const timer=setTimeout(()=>{
+    setDebounceSearch(searchText);
+  },900);
+  return()=>clearTimeout(timer);
+},[searchText])
   return (
     <>
       <Navbar />

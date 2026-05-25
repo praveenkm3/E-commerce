@@ -10,6 +10,7 @@ function Mobiles() {
   const { searchText } = UseSearch();
   const [phonesData, setPhonesData] = useState({});
   const [isLoading, setLoading] = useState(true);
+  const [dbounceSearch,setDebounceSearch]=useState("")
 
   useEffect(() => {
     fetch("https://dummyjson.com/products/category/smartphones")
@@ -20,14 +21,19 @@ function Mobiles() {
       })
       .catch((err) => console.log("Error occurs ", err));
   }, []);
-
+useEffect(()=>{
+  const timer=setTimeout(()=>{
+    setDebounceSearch(searchText);
+  },900);
+  return()=>clearTimeout(timer);
+},[searchText])
   //navbar search
   const filteredProducts = phonesData?.products
     ? phonesData.products.filter((item) => {
-        if (!searchText.trim()) return true;
+        if (!dbounceSearch.trim()) return true;
         return item.title
           .toLowerCase()
-          .startsWith(searchText.trim().toLowerCase());
+          .startsWith(dbounceSearch.trim().toLowerCase());
       })
     : [];
 

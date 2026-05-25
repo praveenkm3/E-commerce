@@ -43,11 +43,11 @@ export default function MediaCard({ item }) {
     (wishItem) => wishItem.id === item.id,
   );
   return (
-    <Card sx={{  }}>
+    <Card sx={{ zIndex:0 }}>
       <Box sx={{ position: "relative" }}>
         <Carousel axis="horizontal" autoPlay="true" interval="3000" stopOnHover="true" autoFocus="true">
           {item.images.map((img) => {
-            return <img src={img}></img>;
+            return <Box style={{zIndex:-1}} component='img' src={img}></Box>;
           })}
         </Carousel>
 
