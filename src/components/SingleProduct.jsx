@@ -151,7 +151,13 @@ export default function QuiltedImageList() {
                 <ListItem>{currentProduct.availabilityStatus}</ListItem>
                 <ListItem>Weight: {currentProduct.weight}00 gms</ListItem>
               </List>
-              <Button sx={{ bgcolor: "black",color:"white" }} onClick={addCartSubmit}>Add to Cart</Button>
+              <Button 
+              sx={{ bgcolor: "black",color:"white" }} 
+              onClick={addCartSubmit}
+              
+              >
+                Add to Cart
+              </Button>
             </Box>
           </Box>
         </Box>

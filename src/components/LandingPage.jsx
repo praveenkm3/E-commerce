@@ -28,7 +28,7 @@ function LandingPage(){
                         <div>
                             <Navbar />
                         </div>
-                        <div className="mt-17 fixed top-0 right-0 w-full mb:40">
+                        <div className="mt-17 fixed z-50 top-0 right-0 w-full">
                             <ProductNavbar />
                         </div> 
                         <div>
