@@ -14,6 +14,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import StartPage from "./StartPage"; 
 //theme
+import Chip from "@mui/material/Chip";
+import { styled } from "@mui/material/styles";
+import GoogleIcon from "@mui/icons-material/Google";
+import Divider from "@mui/material/Divider";
+//firebase
+import { auth, provider } from "../firebase";
+// import { createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithPopup } from "firebase/auth";
+//theme
 const theme = createTheme({
   palette: {
     mode: "light",
@@ -24,6 +33,15 @@ const theme = createTheme({
     },
   },
 });
+const Root = styled("div")(({ theme }) => ({
+  width: "100%",
+  ...theme.typography.body2,
+  color: (theme.vars || theme).palette.text.secondary,
+  "& > :not(style) ~ :not(style)": {
+    marginTop: theme.spacing(2),
+  },
+}));
+
 
 function Login() {
   const navigate = useNavigate();
@@ -49,10 +67,20 @@ function Login() {
       ) {
         alert("login success");
         setUser({ email: "", password: "" });
-        navigate("/landingpage");
+        navigate("/sports");
       } else {
         alert("Invalid password");
       }
+    }
+  }
+  async function handleGoogleSignUp() {
+    try {
+      const res = await signInWithPopup(auth, provider);
+      const user = res.user;
+      console.log(user);
+      navigate("/landingpage");
+    } catch (error) {
+      alert("Google sign-in failed:", error.message);
     }
   } 
 
@@ -183,7 +211,7 @@ function Login() {
               placeholder="Email Address"
               variant="outlined"
               sx={{
-                mt: 6,
+                mt: 3,
                 p: 1.5,
                 width: "80%",
                 backgroundColor: "#f7f7f7",
@@ -223,11 +251,14 @@ function Login() {
                 "& fieldset": { border: "none" },
               }}
             />
+            <Button sx={{fontWeight:500,ml:35,pt:1,color:theme.palette.primary.main}}>
+              Forgot Password
+            </Button>
 
             {/* login button */}
             <Button
               sx={{
-                mt: 4,
+                mt: 1,
                 pl: 25,
                 pr: 25,
                 pt: 2,
@@ -239,6 +270,19 @@ function Login() {
               onClick={handleSubmit}
             >
               Login
+            </Button>
+            <Root sx={{mt:2,mb:2}}>
+              <Divider>
+                <Chip label="Or Login With" size="small" />
+              </Divider>
+            </Root>
+            <Button
+              sx={{ mb: 2, mr: 27 }}
+              variant="contained"
+              onClick={handleGoogleSignUp}
+            >
+              <GoogleIcon sx={{ color: "orange", mr: 2 }}></GoogleIcon>
+              SignIn With Google
             </Button>
              
           </Box>

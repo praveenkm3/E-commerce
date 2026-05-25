@@ -257,7 +257,7 @@ function Signup() {
             {/* <Divider sx={{ width: '50%', mx: 'auto', my: 2,border:0.5 }} />  */}
             <Root sx={{mt:2,mb:2}}>
               <Divider>
-                <Chip label="Or Login With" size="small" />
+                <Chip label="Or SignUp With" size="small" />
               </Divider>
             </Root>
             <Button
