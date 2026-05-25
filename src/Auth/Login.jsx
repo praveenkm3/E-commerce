@@ -15,8 +15,7 @@ import { useNavigate } from "react-router";
 import StartPage from "./StartPage"; 
 //theme
 import Chip from "@mui/material/Chip";
-import { styled } from "@mui/material/styles";
-import GoogleIcon from "@mui/icons-material/Google";
+import { styled } from "@mui/material/styles"; 
 import Divider from "@mui/material/Divider";
 //firebase
 import { auth, provider } from "../firebase";
@@ -277,11 +276,17 @@ function Login() {
               </Divider>
             </Root>
             <Button
-              sx={{ mb: 2, mr: 27 }}
+              sx={{ mb: 2,color:"black",bgcolor:"white" }}
               variant="contained"
               onClick={handleGoogleSignUp}
+              startIcon={
+                <img
+                  src="/google_icon.svg"
+                  alt="Google"
+                  style={{ width: "20px", height: "20px" }}
+                />
+              }
             >
-              <GoogleIcon sx={{ color: "orange", mr: 2 }}></GoogleIcon>
               SignIn With Google
             </Button>
              

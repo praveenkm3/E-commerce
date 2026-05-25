@@ -12,7 +12,12 @@ import Cart from '../assets/User/Cart';
 import WishList from '../assets/User/Wishlist';
 import { createBrowserRouter } from 'react-router';
 import QuiltedImageList from './SingleProduct';
+import UserProfile from '../assets/User/UserProfile';
 const routes=createBrowserRouter([
+  {
+    path:"/profile",
+    element:<UserProfile/>
+  },
   {
     path:"/single",
     element:<QuiltedImageList/>

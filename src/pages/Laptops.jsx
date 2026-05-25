@@ -17,7 +17,6 @@ function Laptops() {
   const [laptopsData, setLaptopsData] = useState({});
   
   useEffect(() => {
-    
     fetch("https://dummyjson.com/products/category/laptops")
       .then((res) => res.json())
       .then((res) => {

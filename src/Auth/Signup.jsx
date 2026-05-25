@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import StartPage from "./StartPage";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import GoogleIcon from "@mui/icons-material/Google";
 import Divider from "@mui/material/Divider";
 import { useNavigate } from "react-router";
 import Chip from "@mui/material/Chip";
@@ -255,18 +254,24 @@ function Signup() {
               SignUp
             </Button>
             {/* <Divider sx={{ width: '50%', mx: 'auto', my: 2,border:0.5 }} />  */}
-            <Root sx={{mt:2,mb:2}}>
+            <Root sx={{ mt: 2, mb: 2 }}>
               <Divider>
                 <Chip label="Or SignUp With" size="small" />
               </Divider>
             </Root>
             <Button
-              sx={{ mb: 2, mr: 27 }}
+              sx={{ mb: 2, color: "black", bgcolor: "white" }}
               variant="contained"
               onClick={handleGoogleSignUp}
+              startIcon={
+                <img
+                  src="/google_icon.svg"
+                  alt="Google"
+                  style={{ width: "20px", height: "20px" }}
+                />
+              }
             >
-              <GoogleIcon sx={{ color: "orange", mr: 2 }}></GoogleIcon>
-              SignUp With Google
+              SignUp with Google
             </Button>
           </Box>
         </Paper>

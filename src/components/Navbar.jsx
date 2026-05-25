@@ -1,4 +1,5 @@
 //firebase
+import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
 import { Link, useNavigate } from "react-router";
 import { useSelector } from "react-redux";
@@ -20,7 +21,11 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import SearchIcon from "@mui/icons-material/Search";
-
+import Tooltip from "@mui/material/Tooltip";
+import MenuItem from "@mui/material/MenuItem";
+import Menu from "@mui/material/Menu";
+import { useState, useEffect } from "react";
+import { Button } from "@mui/material";
 // Styled components for the Search Bar
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -60,8 +65,17 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }));
-
+const settings = ["Profile", "Logout"];
 function Navbar() {
+  const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
   //useSearch
   const { searchText, addSearch, removeSearch } = UseSearch();
   const location = useLocation().pathname;
@@ -95,6 +109,21 @@ function Navbar() {
   }
   //   console.log(products);
   // console.log(search);
+  function handleProfile(setting) {
+    if (setting === "Profile") {
+      navigate("/profile");
+    } else {
+      handleLogout();
+    }
+  }
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
+      }
+    });
+  }, []);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -105,7 +134,7 @@ function Navbar() {
           boxShadow: "none",
           borderBottom: "1px solid rgba(255, 255, 255, 0.3)",
           color: "black",
-          
+        
         }}
       >
         <Toolbar>
@@ -134,7 +163,7 @@ function Navbar() {
           <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
             <Link to={`/landingpage`}>
               <IconButton>
-                <HomeIcon sx={{ color: "black" }}/>
+                <HomeIcon sx={{ color: "black" }} />
               </IconButton>
             </Link>
             <Link to={`/wishlist`}>
@@ -163,14 +192,53 @@ function Navbar() {
             <IconButton onClick={handleLogout}>
               <LogoutIcon sx={{ color: "black" }} />
             </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+ 
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  {user ? (
+                    <Box
+                      component="img"
+                      src={user.photoURL}
+                      sx={{
+                        height:35,
+                        borderRadius: "50%",
+                      }}
+                    />
+                  ) : (
+                    <AccountCircle sx={{ color: "black" }} />
+                  )}
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                {settings.map((setting) => (
+                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <Button
+                      sx={{ textAlign: "center" }}
+                      onClick={() => handleProfile(setting)}
+                    >
+                      {setting}
+                    </Button>
+                  </MenuItem>
+                ))}
+              </Menu>
+            </Box>
+ 
           </Box>
         </Toolbar>
       </AppBar>
