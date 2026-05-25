@@ -37,7 +37,6 @@ function EmptyShow() {
             component="img"
             src="../../../public/image.png"
             sx={{
-              boxShadow: 3,
               p: 4,
               ml:3,
               bgcolor: "background.paper",
