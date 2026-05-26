@@ -1,7 +1,6 @@
 import { useState } from "react";
 import {
-  Box,
-  createTheme,
+  Box, 
   Typography,
   TextField,
   Paper,
@@ -17,17 +16,7 @@ import { styled } from "@mui/material/styles";
 import { auth, provider } from "../firebase";
 // import { createUserWithEmailAndPassword } from "firebase/auth";
 import { signInWithPopup } from "firebase/auth";
-//theme
-const theme = createTheme({
-  palette: {
-    mode: "light",
-    primary: {
-      main: "#006BFF",
-      dark: "#0f172a",
-      light: "#ffffff",
-    },
-  },
-});
+
 const Root = styled("div")(({ theme }) => ({
   width: "100%",
   ...theme.typography.body2,
@@ -64,9 +53,10 @@ function Signup() {
     try {
       const res = await signInWithPopup(auth, provider);
       const user = res.user;
-      console.log(user);
+      // console.log(user);
       navigate("/landingpage");
     } catch (error) {
+      // console.log(error.message);
       alert("Google sign-in failed:", error.message);
     }
   }
@@ -105,7 +95,8 @@ function Signup() {
               width: "45%",
               height: "100%",
               borderRadius: "30px",
-              background: theme.palette.primary.main,
+              background: "linear-gradient(45deg, #004080, #000000)",
+
               color: "#fff",
               p: 5,
               boxSizing: "border-box",
@@ -197,7 +188,6 @@ function Signup() {
               variant="outlined"
               sx={{
                 mt: 3,
-                p: 1.5,
                 width: "80%",
                 backgroundColor: "#f7f7f7",
                 borderRadius: "14px",
@@ -222,13 +212,12 @@ function Signup() {
               variant="outlined"
               sx={{
                 mt: 2,
-                p: 1.5,
                 width: "80%",
                 backgroundColor: "#f7f7f7",
                 borderRadius: "14px",
                 border: "none",
-                fontSize: "20px",
-                fontWeight: 700,
+                fontSize: "10px",
+                fontWeight: 500,
                 "& input::placeholder": {
                   fontWeight: "bold",
                   opacity: 1,
@@ -251,16 +240,24 @@ function Signup() {
               variant="contained"
               onClick={handleSubmit}
             >
-              SignUp
+              Register
             </Button>
             {/* <Divider sx={{ width: '50%', mx: 'auto', my: 2,border:0.5 }} />  */}
             <Root sx={{ mt: 2, mb: 2 }}>
               <Divider>
-                <Chip label="Or SignUp With" size="small" />
+                <Chip label="Or SignUp With" size="small" sx={{background:'none'}} />
               </Divider>
             </Root>
             <Button
-              sx={{ mb: 2, color: "black", bgcolor: "white" }}
+              sx={{
+                mb: 2,
+                color: "black",
+                bgcolor: "white",
+                boxShadow: "none",
+                border: "1px solid #d4d4d5",
+                borderRadius: "53px",
+                paddingInline: "24px",
+              }}
               variant="contained"
               onClick={handleGoogleSignUp}
               startIcon={

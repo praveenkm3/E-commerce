@@ -8,3 +8,11 @@
 .carousel .carousel-status {
     display: none!important;
 }
+.css-7g039-MuiPaper-root-MuiAppBar-root {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15)!important;
+    background-color: white!important;
+    
+}
+.css-53g0n7-MuiButtonBase-root-MuiIconButton-root {
+        --IconButton-hoverBg: rgba(0, 0, 0, 0.0)!important;
+}

@@ -16,8 +16,7 @@ import { styled, alpha } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton"; 
 import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import SearchIcon from "@mui/icons-material/Search";
@@ -98,8 +97,9 @@ function Navbar() {
         navigate(`/${searchProduct[0]}`);
         removeSearch(""); //for next navbar
       } else {
-        alert("Product not found");
+        // alert("Product not found");
         removeSearch("");
+        navigate('/pagenotfound')
       }
     }
   }
@@ -138,11 +138,27 @@ function Navbar() {
         }}
       >
         <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            E-Cart
-          </Typography>
+          <Box
+              sx={{
+               top:0, 
+               mt:1,
+                position: "fixed",
+                width: 50,
+                height: 50,
+                borderRadius: "50%",
+                backgroundColor: "#0B5CFF",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                color: "#fff",
+                fontSize: "24px",
+                fontWeight: 700,
+              }}
+            >
+              <ShoppingCartIcon />
+            </Box> 
 
-          <Box sx={{ ml: "20em" }}>
+          <Box sx={{ ml: "20em",border:0.2,width:"40em" }}>
             <Search onClick={handleSubmit}>
               <SearchIconWrapper>
                 <SearchIcon />

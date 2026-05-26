@@ -1,8 +1,8 @@
 import AppBar from "@mui/material/AppBar";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import { Link } from "react-router"; 
-//navbar 
-import Typography from "@mui/material/Typography";
+//navbar  
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton"; 
@@ -24,10 +24,26 @@ function StartPage() {
           color: "black",
         }}
       >
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            E-Cart
-          </Typography>
+        <Toolbar> 
+            <Box
+              sx={{
+               top:0, 
+               mt:1,
+                position: "fixed",
+                width: 50,
+                height: 50,
+                borderRadius: "50%",
+                backgroundColor: "#0B5CFF",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                color: "#fff",
+                fontSize: "24px",
+                fontWeight: 700,
+              }}
+            >
+              <ShoppingCartIcon />
+            </Box> 
 
           <Box sx={{ flexGrow: 1 }} />
 

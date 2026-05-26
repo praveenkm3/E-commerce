@@ -13,7 +13,12 @@ import WishList from '../assets/User/Wishlist';
 import { createBrowserRouter } from 'react-router';
 import QuiltedImageList from './SingleProduct';
 import UserProfile from '../assets/User/UserProfile';
+import PageNotFound from './PageNotFound';
 const routes=createBrowserRouter([
+  {
+    path:"/pagenotfound",
+    element:<PageNotFound/>
+  },
   {
     path:"/profile",
     element:<UserProfile/>
