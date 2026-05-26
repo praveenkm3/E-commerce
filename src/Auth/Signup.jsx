@@ -46,6 +46,7 @@ function Signup() {
     if (user.email === "" || user.password === "") {
       alert("Enter details");
     } else {
+      
       localStorage.setItem("user", JSON.stringify(user));
       alert("Signup success");
       navigate("/login");
@@ -57,8 +58,9 @@ function Signup() {
       const res = await signInWithPopup(auth, provider);
       const user = res.user;
       console.log(user);
-      navigate("/landingpage");
       userActivate();
+      navigate("/landingpage");
+      
     } catch (error) {
       // console.log(error.message);
       alert("Google sign-in failed:", error.message);

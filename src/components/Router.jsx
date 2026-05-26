@@ -14,19 +14,18 @@ import QuiltedImageList from "./SingleProduct";
 import UserProfile from "../assets/User/UserProfile";
 import PageNotFound from "./PageNotFound";
 
-
-import { GetAuthStatus } from "../assets/User/AuthContext";
-async function authMiddleware({context},next) {
+// import { GetAuthStatus } from "../assets/User/AuthContext";
+async function authMiddleware({ context }, next) {
   // debugger;
-  const { userLoggedIn } = GetAuthStatus();
-  console.log(userLoggedIn);
-  if(!userLoggedIn){
-    throw redirect('/login');
-  }  
+  // const { userLoggedIn } = GetAuthStatus();
+  const userlogged = localStorage.getItem("userlogged");
+  console.log(userlogged);
+  if (userlogged !== "true") {
+    throw redirect("/login");
+  }
   await next();
 }
 
- 
 const routes = createBrowserRouter([
   {
     path: "/pagenotfound",
@@ -40,13 +39,14 @@ const routes = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
-  {
-    path: "/",
-    element: <App />,
-  },
+
   {
     middleware: [authMiddleware],
     children: [
+      {
+        path: "/",
+        element: <App />,
+      },
       {
         path: "/landingpage",
         element: <LandingPage />,
@@ -90,23 +90,4 @@ const routes = createBrowserRouter([
     ],
   },
 ]);
-
-// {
-//     middleware: [authMiddleware],
-//     children: [
-//       {
-//         path: "/profile",
-//         Component: UserProfile,
-//       },
-//       {
-//         path: '/cart',
-//         Component: Cart,
-//       },
-//       {
-//         path: '/wishlist',
-//         Component: WishList,
-//       },
-//     ],
-//   }
-
 export default routes;

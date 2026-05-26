@@ -67,6 +67,7 @@ function Login() {
       ) {
         alert("login success");
         setUser({ email: "", password: "" });
+        userActivate();
         navigate("/landingpage");
       } else {
         alert("Invalid password");
@@ -77,8 +78,8 @@ function Login() {
     try {
       const res = await signInWithPopup(auth, provider);
       // const user = res.user;
-      // console.log(user);
-      userActivate(true);
+      console.log(user);
+      userActivate();
       navigate("/landingpage");
     } catch (error) {
       alert("Google sign-in failed:", error.message);

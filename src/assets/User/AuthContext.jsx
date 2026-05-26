@@ -1,18 +1,19 @@
-import { useContext, createContext, useState, useEffect } from "react";
+import { useContext, createContext, useState } from "react";
 const AuthContext = createContext();
 
 
-const authStatus={userLoggedIn:false};
+// const authStatus={userLoggedIn:false};
 export function AuthProvider({ children }) {
   const [loggedUser, setLoggedUser] = useState(false);
   function userActivate() {
     setLoggedUser(true);
-    authStatus.userLoggedIn=true;
+    localStorage.setItem("userlogged","true");
 
   }
   function userDeActivate(){ 
-    setLoggedUser(false);
-    authStatus.userLoggedIn=false;
+    setLoggedUser(false); 
+    localStorage.setItem("userlogged","false");
+
   }
   
   return (
@@ -25,6 +26,6 @@ export function AuthProvider({ children }) {
 export default function UseAuth() {
   return useContext(AuthContext);
 }
-export function GetAuthStatus(){
-  return authStatus;
-}
+// export function GetAuthStatus(){
+//   return authStatus;
+// }
