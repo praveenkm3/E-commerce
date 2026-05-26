@@ -1,3 +1,4 @@
+import UseAuth from "../assets/User/AuthContext";
 //firebase
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
@@ -18,6 +19,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton"; 
 import InputBase from "@mui/material/InputBase";
+import {Typography} from "@mui/material";
 import Badge from "@mui/material/Badge";
 import SearchIcon from "@mui/icons-material/Search";
 import Tooltip from "@mui/material/Tooltip";
@@ -66,6 +68,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 const settings = ["Profile", "Logout"];
 function Navbar() {
+    const{ userDeActivate}=UseAuth();
+  
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleOpenUserMenu = (event) => {
@@ -104,6 +108,7 @@ function Navbar() {
     }
   }
   function handleLogout() {
+    userDeActivate();
     auth.signOut();
     navigate("/landingpage");
   }
@@ -113,7 +118,9 @@ function Navbar() {
     if (setting === "Profile") {
       navigate("/profile");
     } else {
+      userDeActivate();
       handleLogout();
+      
     }
   }
   const [user, setUser] = useState(null);
@@ -142,21 +149,28 @@ function Navbar() {
               sx={{
                top:0, 
                mt:1,
+               p:3,
                 position: "fixed",
-                width: 50,
-                height: 50,
+                width: 30,
+                height: 30,
                 borderRadius: "50%",
-                backgroundColor: "#0B5CFF",
+                backgroundColor: "#fff",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                color: "#fff",
+                color: "#0B5CFF",
                 fontSize: "24px",
                 fontWeight: 700,
               }}
             >
-              <ShoppingCartIcon />
-            </Box> 
+              <ShoppingCartIcon  /> 
+              
+            </Box>
+            <Box>
+              <Typography variant="h5" sx={{color:"black",ml:6,fontFamily:"cursive",fontWeight:"bold"}}>
+                Cartify
+              </Typography>
+              </Box> 
 
           <Box sx={{ ml: "20em",border:0.2,width:"40em" }}>
             <Search onClick={handleSubmit}>

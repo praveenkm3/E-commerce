@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar";
 
 import MediaCard from "../components/Product";
 function Sports() {
+  
   //debouncesearch
   const [debounceSearch, setDebounceSearch] = useState("");
   const [isLoading, setLoading] = useState(true);

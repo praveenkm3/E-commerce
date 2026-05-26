@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton"; 
 import { styled } from '@mui/material/styles';
+import { Typography } from "@mui/material";
 
 const Div = styled('div')(({ theme }) => ({
   ...theme.typography.button, 
@@ -29,21 +30,27 @@ function StartPage() {
               sx={{
                top:0, 
                mt:1,
+               p:3,
                 position: "fixed",
-                width: 50,
-                height: 50,
+                width: 30,
+                height: 30,
                 borderRadius: "50%",
-                backgroundColor: "#0B5CFF",
+                backgroundColor: "#fff",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                color: "#fff",
+                color: "#003365",
                 fontSize: "24px",
                 fontWeight: 700,
               }}
             >
-              <ShoppingCartIcon />
-            </Box> 
+              <ShoppingCartIcon  /> 
+              
+            </Box>
+            <Box>
+              <Typography variant="h5" sx={{color:"black",ml:6,fontFamily:"cursive",fontWeight:"bold"}}>
+                Cartify
+              </Typography></Box> 
 
           <Box sx={{ flexGrow: 1 }} />
 

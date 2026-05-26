@@ -1,4 +1,5 @@
 import { useState } from "react";
+import UseAuth from "../assets/User/AuthContext";
 import {
   Box, 
   Typography,
@@ -27,6 +28,8 @@ const Root = styled("div")(({ theme }) => ({
 }));
 
 function Signup() {
+  const{loggedUser, userActivate}=UseAuth();
+  console.log(loggedUser);
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
@@ -53,8 +56,9 @@ function Signup() {
     try {
       const res = await signInWithPopup(auth, provider);
       const user = res.user;
-      // console.log(user);
+      console.log(user);
       navigate("/landingpage");
+      userActivate();
     } catch (error) {
       // console.log(error.message);
       alert("Google sign-in failed:", error.message);
@@ -96,14 +100,14 @@ function Signup() {
               height: "100%",
               borderRadius: "30px",
               background: "linear-gradient(45deg, #004080, #000000)",
-
               color: "#fff",
               p: 5,
               boxSizing: "border-box",
-              flexShrink: 0,
+              flexShrink: 0, 
             }}
           >
-            <Typography
+            <Box sx={{marginTop:20}}>
+              <Typography
               sx={{ fontSize: "45px", fontWeight: 700, lineHeight: 1.2, mt: 4 }}
             >
               Simplify
@@ -112,6 +116,7 @@ function Signup() {
               <br />
               Our Dashboard
             </Typography>
+            </Box>
             <Box
               sx={{
                 mt: 4,
@@ -140,37 +145,25 @@ function Signup() {
           >
             <Box
               sx={{
-                mr: 22,
                 position: "fixed",
                 width: 60,
                 height: 60,
                 borderRadius: "50%",
-                backgroundColor: "#0B5CFF",
+                backgroundColor: "#003365",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
                 color: "#fff",
                 fontSize: "24px",
-                fontWeight: 700,
+                fontWeight: 700, 
               }}
             >
               <ShoppingCartIcon />
             </Box>
-            <Typography
-              variant="h5"
-              sx={{
-                mt: 2,
-                ml: 9,
-                fontSize: "28px",
-                fontWeight: 600,
-                color: "#111",
-              }}
-            >
-              E-Commerce
-            </Typography>
+            
             <Typography
               variant="h4"
-              sx={{ mt: 4, fontSize: "35px", fontWeight: 700, color: "#000" }}
+              sx={{ mt: 10, fontSize: "35px", fontWeight: 700, color: "#000" }}
             >
               Welcome User
             </Typography>
@@ -236,6 +229,7 @@ function Signup() {
                 pb: 2,
                 borderRadius: "12px",
                 color: "#f7f7f7",
+                background:"#002951"
               }}
               variant="contained"
               onClick={handleSubmit}

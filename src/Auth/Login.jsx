@@ -1,4 +1,5 @@
-//firebase 
+import UseAuth from "../assets/User/AuthContext";
+//firebase
 
 import {
   Box,
@@ -8,14 +9,14 @@ import {
   Paper,
   Button,
 } from "@mui/material";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"; 
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 //login
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import StartPage from "./StartPage"; 
+import StartPage from "./StartPage";
 //theme
 import Chip from "@mui/material/Chip";
-import { styled } from "@mui/material/styles"; 
+import { styled } from "@mui/material/styles";
 import Divider from "@mui/material/Divider";
 //firebase
 import { auth, provider } from "../firebase";
@@ -41,8 +42,8 @@ const Root = styled("div")(({ theme }) => ({
   },
 }));
 
-
 function Login() {
+  const { userActivate } = UseAuth();
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
@@ -75,17 +76,17 @@ function Login() {
   async function handleGoogleSignUp() {
     try {
       const res = await signInWithPopup(auth, provider);
-      const user = res.user;
-      console.log(user);
+      // const user = res.user;
+      // console.log(user);
+      userActivate(true);
       navigate("/landingpage");
     } catch (error) {
       alert("Google sign-in failed:", error.message);
     }
-  } 
+  }
 
   return (
     <>
-       
       <StartPage />
       <Box
         sx={{
@@ -119,22 +120,29 @@ function Login() {
               width: "45%",
               height: "100%",
               borderRadius: "30px",
-              background: theme.palette.primary.main,
+               background: "linear-gradient(45deg, #004080, #000000)",
               color: "#fff",
               p: 5,
               boxSizing: "border-box",
               flexShrink: 0,
             }}
           >
-            <Typography
-              sx={{ fontSize: "45px", fontWeight: 700, lineHeight: 1.2, mt: 4 }}
-            >
-              Simplify
-              <br />
-              Management With
-              <br />
-              Our Dashboard
-            </Typography>
+            <Box sx={{ marginTop: 20 }}>
+              <Typography
+                sx={{
+                  fontSize: "45px",
+                  fontWeight: 700,
+                  lineHeight: 1.2,
+                  mt: 4,
+                }}
+              >
+                Simplify
+                <br />
+                Management With
+                <br />
+                Our Dashboard
+              </Typography>
+            </Box>
             <Box
               sx={{
                 mt: 4,
@@ -163,12 +171,11 @@ function Login() {
           >
             <Box
               sx={{
-                mr: 22,
                 position: "fixed",
                 width: 60,
                 height: 60,
                 borderRadius: "50%",
-                backgroundColor: "#0B5CFF",
+                backgroundColor: "#003365",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -179,21 +186,10 @@ function Login() {
             >
               <ShoppingCartIcon />
             </Box>
+
             <Typography
               variant="h5"
-              sx={{
-                mt: 2,
-                ml: 9,
-                fontSize: "28px",
-                fontWeight: 600,
-                color: "#111",
-              }}
-            >
-              E-Commerce
-            </Typography>
-            <Typography
-              variant="h5"
-              sx={{ mt: 4, fontSize: "35px", fontWeight: 700, color: "#000" }}
+              sx={{ mt: 10, fontSize: "35px", fontWeight: 700, color: "#000" }}
             >
               Welcome Back
             </Typography>
@@ -210,8 +206,7 @@ function Login() {
               placeholder="Email Address"
               variant="outlined"
               sx={{
-                mt: 3,
-                p: 1.5,
+                mt: 3, 
                 width: "80%",
                 backgroundColor: "#f7f7f7",
                 borderRadius: "14px",
@@ -235,8 +230,7 @@ function Login() {
               placeholder="Enter Password"
               variant="outlined"
               sx={{
-                mt: 2,
-                p: 1.5,
+                mt: 2, 
                 width: "80%",
                 backgroundColor: "#f7f7f7",
                 borderRadius: "14px",
@@ -250,7 +244,14 @@ function Login() {
                 "& fieldset": { border: "none" },
               }}
             />
-            <Button sx={{fontWeight:500,ml:35,pt:1,color:theme.palette.primary.main}}>
+            <Button
+              sx={{
+                fontWeight: 300,
+                ml: 35,
+                pt: 1,
+                color: theme.palette.primary.main,
+              }}
+            >
               Forgot Password
             </Button>
 
@@ -263,20 +264,27 @@ function Login() {
                 pt: 2,
                 pb: 2,
                 borderRadius: "12px",
-                color: "#f7f7f7",
+                color: "#f7f7f7", 
+                background:"#002951"
               }}
               variant="contained"
               onClick={handleSubmit}
             >
               Login
             </Button>
-            <Root sx={{mt:2,mb:2}}>
-              <Divider>
-                <Chip label="Or Login With" size="small" />
+            <Root sx={{ mt: 2, mb: 2 }}>
+              <Divider >
+                <Chip label="Or Login With" size="small" sx={{background:"none"}} />
               </Divider>
             </Root>
             <Button
-              sx={{ mb: 2,color:"black",bgcolor:"white" }}
+              sx={{ mb: 2,
+                color: "black",
+                bgcolor: "white",
+                boxShadow: "none",
+                border: "1px solid #d4d4d5",
+                borderRadius: "53px",
+                paddingInline: "24px", }}
               variant="contained"
               onClick={handleGoogleSignUp}
               startIcon={
@@ -289,7 +297,6 @@ function Login() {
             >
               SignIn With Google
             </Button>
-             
           </Box>
         </Paper>
       </Box>
