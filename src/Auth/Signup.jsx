@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UseAuth from "../assets/User/AuthContext";
 import {
   Box, 
@@ -31,6 +31,12 @@ function Signup() {
   const{loggedUser, userActivate}=UseAuth();
   console.log(loggedUser);
   const navigate = useNavigate();
+  useEffect(()=>{
+    const userlogged=localStorage.getItem("userlogged");
+    if(userlogged==="true"){
+      navigate('/landingpage')
+    }
+  },[navigate])
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -55,7 +61,9 @@ function Signup() {
   }
   async function handleGoogleSignUp() {
     try {
+      debugger;
       const res = await signInWithPopup(auth, provider);
+
       const user = res.user;
       console.log(user);
       userActivate();

@@ -47,7 +47,7 @@ export default function MediaCard({ item }) {
       <Box sx={{ position: "relative" }}>
         <Carousel showThumbs={false} axis="horizontal" autoPlay="true" interval="3000" stopOnHover="true" autoFocus="true">
           {item.images.map((img) => {
-            return <Box style={{zIndex:-1}} component='img' src={img}></Box>;
+            return <Box style={{zIndex:-1}} component='img' src={img} loading="lazy"></Box>;
           })}
         </Carousel>
 

@@ -1,6 +1,6 @@
 import UseAuth from "../assets/User/AuthContext";
 //firebase
-
+import { useEffect } from "react";
 import {
   Box,
   createTheme,
@@ -49,6 +49,12 @@ function Login() {
     email: "",
     password: "",
   });
+  useEffect(()=>{
+      const userlogged=localStorage.getItem("userlogged");
+      if(userlogged==="true"){
+        navigate('/landingpage')
+      }
+    },[navigate])
   function handleChange(event) {
     //password ,enteredpassword
     //email ,enteredemail
@@ -78,7 +84,7 @@ function Login() {
     try {
       const res = await signInWithPopup(auth, provider);
       // const user = res.user;
-      console.log(user);
+      // console.log(res);
       userActivate();
       navigate("/landingpage");
     } catch (error) {
