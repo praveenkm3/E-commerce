@@ -111,7 +111,7 @@ export default function QuiltedImageList() {
                 {currentProduct.description}
               </Typography>
               <Typography variant="p" sx={{ fontWeight: 600, fontSize: 20 }}>
-                Rating{" "}
+                Product Rating{"  "}
               </Typography>
               <Rating
                 name="text-feedback"

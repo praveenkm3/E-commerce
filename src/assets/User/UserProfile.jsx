@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Box,Typography } from "@mui/material";
 import Navbar from "../../components/Navbar";
 function UserProfile() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null); 
   useEffect(()=>{
     onAuthStateChanged(auth, (currentUser) => {
     if (currentUser) {
@@ -17,7 +17,7 @@ function UserProfile() {
     <>
       <Navbar/>
       {user && (
-        <Box sx={{ position: "relative",mt:20 }}>
+        <Box sx={{ position: "relative",mt:10 }}>
           <Box
             sx={{ 
               
@@ -38,7 +38,7 @@ function UserProfile() {
               <Typography variant="h5" sx={{ml:30,pt:7,color:"white",fontWeight:"bold"}}>
                 {user.email}
               </Typography>
-
+              
           </Box>
           
         </Box>

@@ -208,17 +208,17 @@ function Navbar() {
               </IconButton>
             </Link>
 
+            <Link to={`/cart`}>
             <IconButton
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Link to={`/cart`}>
                 <Badge badgeContent={products.length} color="error">
                   <ShoppingCartIcon />
                 </Badge>
-              </Link>
             </IconButton>
+              </Link>
             <IconButton onClick={handleLogout}>
               <LogoutIcon sx={{ color: "black" }} />
             </IconButton>
