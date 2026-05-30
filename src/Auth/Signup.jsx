@@ -60,8 +60,7 @@ function Signup() {
     }
   }
   async function handleGoogleSignUp() {
-    try {
-      debugger;
+    try { 
       const res = await signInWithPopup(auth, provider);
 
       const user = res.user;
