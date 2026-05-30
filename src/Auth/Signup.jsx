@@ -100,6 +100,7 @@ function Signup() {
             display: "flex",
             p: 3,
             gap: 3,
+            
           }}
         >
           {/* left */}
