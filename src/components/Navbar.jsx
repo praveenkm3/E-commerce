@@ -136,7 +136,7 @@ function Navbar() {
       <AppBar
         position="fixed"
         sx={{
-          backgroundColor: "rgba(25, 118, 210, 0.8)",
+          backgroundColor: "white",
           backdropFilter: "blur(10px)",
           boxShadow: "none",
           borderBottom: "1px solid rgba(255, 255, 255, 0.3)",

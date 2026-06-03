@@ -105,11 +105,12 @@ export default function QuiltedImageList() {
                 Price : $ {currentProduct.price}
               </Typography>
               <Typography variant="h5" sx={{ fontWeight: 600, fontSize: 20 }}>
-                Product Description{" "}
+                Product Description
               </Typography>
-              <Typography align="justify" sx={{ mt: 2 }}>
+              <Typography align="justify">
                 {currentProduct.description}
               </Typography>
+              
               <Box sx={{display:"flex",flexDirection:"row"}}>
                 <Typography variant="p" sx={{ fontWeight: 600, fontSize: 20 }}>
                 Product Rating

@@ -43,11 +43,27 @@ export default function MediaCard({ item }) {
     (wishItem) => wishItem.id === item.id,
   );
   return (
-    <Card sx={{ zIndex:0 }}>
-      <Box sx={{ position: "relative" }}>
-        <Carousel showThumbs={false} axis="horizontal" autoPlay="true" interval="3000" stopOnHover="true" autoFocus="true">
-          {item.images.map((img) => {
-            return <Box style={{zIndex:-1}} component='img' src={img} loading="lazy"></Box>;
+    <Card sx={{ zIndex: 0 }}>
+      <Box sx={{ position: "relative", aspectRatio: "1/1" }}>
+        <Carousel
+          showThumbs={false}
+          axis="horizontal"
+          autoPlay="true"
+          interval="3000"
+          stopOnHover="true"
+          autoFocus="true"
+        >
+          {item.images.map((img, index) => {
+            return (
+              <Box
+                style={{ zIndex: -1 }}
+                component="img"
+                src={img}
+                fetchPriority={index == 0 ? "high" : "low"}
+                loading={index == 0 ? "eager" : "lazy"}
+                sx={{width:"100%",height:"100%",objectFit:"cover"}}
+              ></Box>
+            );
           })}
         </Carousel>
 
@@ -81,7 +97,7 @@ export default function MediaCard({ item }) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Box sx={{display:"flex",justifyContent:"space-around",ml:6 }}>
+        <Box sx={{ display: "flex", justifyContent: "space-around", ml: 6 }}>
           <Button
             size="small"
             onClick={() => {
@@ -93,7 +109,7 @@ export default function MediaCard({ item }) {
               <AddShoppingCartIcon />
             </Badge>
           </Button>
-          <Link to={`/single`} state={{product :item}}>
+          <Link to={`/single`} state={{ product: item }}>
             <Button size="small">
               <RemoveRedEyeIcon />
             </Button>
