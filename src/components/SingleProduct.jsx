@@ -110,18 +110,22 @@ export default function QuiltedImageList() {
               <Typography align="justify" sx={{ mt: 2 }}>
                 {currentProduct.description}
               </Typography>
-              <Typography variant="p" sx={{ fontWeight: 600, fontSize: 20 }}>
-                Product Rating{"  "}
-              </Typography>
+              <Box sx={{display:"flex",flexDirection:"row"}}>
+                <Typography variant="p" sx={{ fontWeight: 600, fontSize: 20 }}>
+                Product Rating
+                </Typography>
+              
               <Rating
                 name="text-feedback"
                 value={currentProduct.rating}
                 readOnly
-                precision={currentProduct.rating}
+                precision={currentProduct.rating }
                 emptyIcon={
                   <StarIcon style={{ opacity: 0.55 }} fontSize="inherit" />
                 }
+                sx={{px:2,pt:0.5}}
               />
+              </Box>
               <Box sx={{ ml: 2 }}>{labels[currentProduct.rating]}</Box>
               <Typography variant="p" sx={{ fontWeight: 600, fontSize: 20 }}>Specifications</Typography>
               <List

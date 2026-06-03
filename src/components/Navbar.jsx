@@ -202,7 +202,7 @@ function Navbar() {
                 aria-label="show 4 new mails"
                 color="inherit"
               >
-                <Badge badgeContent={wishProducts.length} color="error">
+                <Badge badgeContent={wishProducts.length} color="secondary">
                   <FavoriteIcon />
                 </Badge>
               </IconButton>
@@ -214,7 +214,7 @@ function Navbar() {
               aria-label="show 17 new notifications"
               color="inherit"
             >
-                <Badge badgeContent={products.length} color="error">
+                <Badge badgeContent={products.length} color="secondary">
                   <ShoppingCartIcon />
                 </Badge>
             </IconButton>
@@ -229,7 +229,8 @@ function Navbar() {
                   {user ? (
                     <Box
                       component="img"
-                      src={user.photoURL}
+                      alt="P"
+                      src={user?.photoURL}
                       sx={{
                         height:35,
                         borderRadius: "50%",
