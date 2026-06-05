@@ -7,9 +7,9 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import CardMedia from "@mui/material/CardMedia"; 
 import { Carousel } from "react-responsive-carousel";
 const mobiles = [
-  "https://cdn.dummyjson.com/product-images/smartphones/iphone-5s/1.webp",
+  "https://cdn.dummyjson.com/product-images/smartphones/samsung-galaxy-s10/1.webp",
   "https://cdn.dummyjson.com/product-images/smartphones/iphone-5s/2.webp",
-  "https://cdn.dummyjson.com/product-images/smartphones/iphone-5s/3.webp",
+  "https://cdn.dummyjson.com/product-images/smartphones/realme-x/1.webp",
 ];
 function Home() {
   const [accessData, setAccessData] = useState({});

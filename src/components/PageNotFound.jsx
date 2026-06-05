@@ -35,7 +35,7 @@ function PageNotFound() {
             <Box sx={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",ml:35,gap:20}}>
                 <Typography variant="h1" sx={{}}>404</Typography>
                 <Typography variant="h3">OOPS! PAGE NOT FOUND</Typography>
-                <Typography variant="p">Sorry,the page you are you are looking for doesn't exist .</Typography>
+                <Typography variant="p">Sorry,the page you are looking for doesn't exist .</Typography>
             </Box>
 
 
