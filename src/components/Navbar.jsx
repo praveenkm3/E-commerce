@@ -192,7 +192,7 @@ function Navbar() {
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
             <Link to={`/landingpage`}>
-              <IconButton>
+              <IconButton size="large">
                 <HomeIcon sx={{ color: "black" }} />
               </IconButton>
             </Link>
@@ -219,13 +219,13 @@ function Navbar() {
                 </Badge>
             </IconButton>
               </Link>
-            <IconButton onClick={handleLogout}>
+            <IconButton size="large" onClick={handleLogout}>
               <LogoutIcon sx={{ color: "black" }} />
             </IconButton>
  
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <IconButton size="large" onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   {user ? (
                     <Box
                       component="img"
