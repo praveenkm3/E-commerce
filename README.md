@@ -1,16 +1,61 @@
-# React + Vite
+# E-commerce Application
+## Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is an **E-commerce Application** that provides user authentication using:
 
-Currently, two official plugins are available:
+- LocalStorage-based signup and login
+- Firebase Google Authentication
+- User session management
+- Secure and simple authentication flow
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The application allows users to create an account, log in using their credentials, or sign in quickly with their Google account through Firebase.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- User Signup using LocalStorage
+- User Login using LocalStorage
+- Google Login with Firebase Authentication
+- Logout functionality
+- Integration Add to Wish & Add to Cart
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Technologies Used
+
+- HTML5
+- CSS3
+- JavaScript
+- Google Firebase
+- React JS
+- Redux ToolKit
+- Context API
+- React Routing
+- Material UI
+
+##  Dynamic Product Search Using Context API
+
+In This application uses React Context API to manage and share the search value across all product pages,To dynamically filter the products.
+
+##  Dynamic Routing Using React Router Dom
+
+Using React Router Dom to dynamically navigate between pages
+
+
+## 🛒 Redux Toolkit for Cart & Wishlist Management
+
+-- In This application uses Redux Toolkit for centralized state management of cart and wishlist functionality
+
+
+
+
+
+
+
+
+
+
+
+
+
